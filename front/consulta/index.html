@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clínica Médica</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar is-primary" role="navigation" aria-label="main navigation">
+    <div class="container">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          Clínica Médica
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns">
+        <!-- Médicos -->
+        <div class="column">
+          <h2 class="title">Médicos</h2>
+          <div class="clickable-card" onclick="exibirDetalhes('Médico: Dr. Carlos')">
+            <div class="card">
+              <div class="card-content">
+                <p class="title is-5">Dr. Carlos</p>
+                <p class="subtitle is-6">Especialidade: Clínico Geral</p>
+              </div>
+            </div>
+          </div>
+          <button id="medico" onclick="alertamedico()">Adicionar ao banco de teste</button>
+        </div>
+        
+        <!-- Pacientes -->
+        <div class="column">
+          <h2 class="title">Pacientes</h2>
+          <div class="clickable-card" onclick="exibirDetalhes('Paciente: Maria Silva')">
+            <div class="card">
+              <div class="card-content">
+                <p class="title is-5">Maria Silva</p>
+                <p class="subtitle is-6">Idade: 35 anos</p>
+              </div>
+            </div>
+          </div>
+          <button id="pacientes" onclick="alertapacientes()">Adicionar ao banco de teste</button>
+        </div>
+      </div>
+      <div class="columns">
+        <!-- Consultas -->
+        <div class="column">
+          <h2 class="title">Consultas</h2>
+          <div class="clickable-card" onclick="exibirDetalhes('Consulta em 20/11/2023')">
+            <div class="card">
+              <div class="card-content">
+                <p class="title is-5">Consulta em 20/11/2023</p>
+                <p class="subtitle is-6">Médico: Dr. Carlos - Paciente: Maria Silva</p>
+              </div>
+            </div>
+          </div>
+          <button id="consultas" onclick="alertaconsultas()">Adicionar ao banco de teste</button>
+        </div>
+        <!-- Prontuários -->
+        <div class="column">
+          <h2 class="title">Prontuários</h2>
+          <div class="clickable-card" onclick="exibirDetalhes('Prontuário de Maria Silva')">
+            <div class="card">
+              <div class="card-content">
+                <p class="title is-5">Prontuário de Maria Silva</p>
+                <p class="subtitle is-6">Histórico Médico</p>
+              </div>
+            </div>
+          </div>
+        <button id="prontuario" onclick="alertaprontuario()">Adicionar ao banco de teste</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="content has-text-centered">
+      <p>
+        © 2023 Clínica Médica. Todos os direitos reservados.
+      </p>
+    </div>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
