@@ -85,6 +85,14 @@ $conn->close();
         <input class="input" type="text" name="usuario" placeholder="Seu nome de usuário">
       </div>
     </div>
+
+    <div class="field">
+      <label class="senha">Insira uma Senha</label>
+      <div class="control">
+        <input class="input" type="password" name="senha" placeholder="Sua Senha de acesso">
+      </div>
+    </div>
+    
     </form>
     <div class="field">
       <div class="control">
