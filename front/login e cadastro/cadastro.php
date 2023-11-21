@@ -8,6 +8,7 @@ $email = $_POST['email'];
 $numeroTelefone = $_POST['numero'];
 $endereco = $_POST['endereco'];
 $nomeUsuario = $_POST['usuario'];
+$senha = $_POST['senha'];
 
 // Verifique a conexão
 if ($conn->connect_error) {
@@ -25,8 +26,8 @@ if ($resultUsuario->num_rows > 0) {
 }
 
 // Insira os dados no banco de dados
-$sqlInserirUsuario = "INSERT INTO projetophp.usuarios (nome_completo, email, numero_telefone, endereco, nome_usuario) 
-                      VALUES ('$nomeCompleto', '$email', '$numeroTelefone', '$endereco', '$nomeUsuario')";
+$sqlInserirUsuario = "INSERT INTO projetophp.usuarios (nome_completo, email, numero_telefone, endereco, nome_usuario,senha) 
+                      VALUES ('$nomeCompleto', '$email', '$numeroTelefone', '$endereco', '$nomeUsuario','$senha')";
 
 if ($conn->query($sqlInserirUsuario) === TRUE) {
     echo "Cadastro realizado com sucesso!";
@@ -84,6 +85,13 @@ $conn->close();
       <div class="control">
         <input class="input" type="text" name="usuario" placeholder="Seu nome de usuário">
       </div>
+
+      <div class="field">
+      <label class="usuario">Senha</label>
+      <div class="control">
+        <input class="input" type="password" name="senha" placeholder="Sua Senha">
+      </div>
+
     </div>
 
     <div class="field">

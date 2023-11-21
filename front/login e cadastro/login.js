@@ -4,5 +4,5 @@ function realizarLogin() {
   }
 
   function irParaCadastro() {
-    window.location.href = "cadastro.html"
-  }
+    window.location.href = "cadastro.php"
+  } 
