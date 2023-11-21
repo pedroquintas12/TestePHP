@@ -2,3 +2,7 @@
 .user-card {
     margin-bottom: 20px;
   }
+  .is-blocked {
+    color: red;
+    font-weight: bold;
+}
