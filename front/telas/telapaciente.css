@@ -1,0 +1,9 @@
+/* Estilos personalizados, se necessário */
+.medico-card {
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+  }
+  .medico-card:hover {
+    transform: scale(1.05);
+  }
