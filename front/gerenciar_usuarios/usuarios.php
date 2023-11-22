@@ -16,7 +16,12 @@
   <?php
   include "conexao.php";
 
-      $sql = "SELECT nomeSobrenome,id_medico,bloqueado FROM projetophp.medicos";
+      $sql = "SELECT p.id_paciente, p.nome_completo, p.bloqueado as bloqueado_paciente,
+      p.permissao as permissao_paciente, m.id_medico,
+      m.nomeSobrenome, m.bloqueado 
+      as bloqueado_medico,
+       m.permissao as permissao_medico
+      FROM projetophp.pacientes AS P , projetophp.medicos AS M;";
 
       $resultado = mysqli_query($conn, $sql);
 
@@ -25,9 +30,9 @@
           echo "<div class='user-card card'>";
           echo "<div class='card-content'>";
           echo "<p class='title'>Dr." . $linha["nomeSobrenome"] . "</p>";
-          echo "<p class='subtitle'>Médico</p>";
+          echo "<p class='subtitle'>". $linha["permissao_medico"]."</p>";
       
-          if ($linha["bloqueado"] == 1) {
+          if ($linha["bloqueado_medico"] == 1) {
               echo "<p class='is-blocked'>Usuário Bloqueado</p>";
               // Botão para reativar o usuário
               echo "<form method='post' action='reativar_usuario.php'>";
@@ -39,6 +44,30 @@
               echo "<button class='button is-success'>Ativar</button>";
               echo "<form method='post' action='bloquear_usuario.php'>";
               echo "<input type='hidden' name='usuario_id' value='" . $linha["id_medico"] . "'>";
+              echo "<button type='submit' class='button is-warning'>Bloquear</button>";
+              echo "</form>";
+              echo "</div>";
+          }
+          echo "</div>";
+          echo "</div>";
+
+          echo "<div class='user-card card'>";
+          echo "<div class='card-content'>";
+          echo "<p class='title'>Paciente " . $linha["nome_completo"] . "</p>";
+          echo "<p class='subtitle'>".$linha["permissao_paciente"]."</p>";
+      
+          if ($linha["bloqueado_paciente"] == 1) {
+              echo "<p class='is-blocked'>Usuário Bloqueado</p>";
+              // Botão para reativar o usuário
+              echo "<form method='post' action='reativar_paciente.php'>";
+              echo "<input type='hidden' name='usuario_id' value='" . $linha["id_paciente"] . "'>";
+              echo "<button type='submit' class='button is-success'>Reativar</button>";
+              echo "</form>";
+          } else {
+              echo "<div class='buttons'>";
+              echo "<button class='button is-success'>Ativar</button>";
+              echo "<form method='post' action='bloquear_paciente.php'>";
+              echo "<input type='hidden' name='usuario_id' value='" . $linha["id_paciente"] . "'>";
               echo "<button type='submit' class='button is-warning'>Bloquear</button>";
               echo "</form>";
               echo "</div>";
