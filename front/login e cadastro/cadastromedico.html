@@ -1,61 +1,20 @@
-<?php
-
-include "conexao.php";
-if(isset($_POST['submit'])){
-// Recupere os dados do formulário
-$nomeCompleto = $_POST['nomecompleto'];
-$email = $_POST['email'];
-$numeroTelefone = $_POST['numero'];
-$endereco = $_POST['endereco'];
-$nomeUsuario = $_POST['usuario'];
-$senha = $_POST['senha'];
-
-// Verifique a conexão
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
-}
-
-// Verifique se o nome de usuário já existe
-$sqlVerificaUsuario = "SELECT * FROM projetophp.usuarios WHERE nome_usuario = '$nomeUsuario'";
-$resultUsuario = $conn->query($sqlVerificaUsuario);
-
-if ($resultUsuario->num_rows > 0) {
-    echo "Nome de usuário já existe. Escolha outro.";
-    $conn->close();
-    exit();
-}
-
-// Insira os dados no banco de dados
-$sqlInserirUsuario = "INSERT INTO projetophp.usuarios (nome_completo, email, numero_telefone, endereco, nome_usuario,senha) 
-                      VALUES ('$nomeCompleto', '$email', '$numeroTelefone', '$endereco', '$nomeUsuario','$senha')";
-
-if ($conn->query($sqlInserirUsuario) === TRUE) {
-    echo "Cadastro realizado com sucesso!";
-} else {
-    echo "Erro ao cadastrar: " . $conn->error;
-}
-
-$conn->close();
-}
-
-?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tela de Cadastro</title>
+  <title>Tela de Cadastro para Médicos</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <link rel="stylesheet" href="cadastro.css">
 </head>
 <body>
-<form action="cadastro.php" method="post">
+<form action="cadastro_medico.php" method="post">
   <div class="container cadastro-container">
-    <h1 class="title has-text-centered">Cadastro</h1>
+    <h1 class="title has-text-centered">Cadastro de Médico</h1>
     <div class="field">
       <label class="nomecompleto">Nome e Sobrenome</label>
       <div class="control">
-        <input class="input" type="text" name="nomecompleto" placeholder="Seu Nome e Sobrenome">
+        <input class="input" type="text" name="nomecompleto" placeholder="Seu nome e Sobrenome">
       </div>
     </div>
 
@@ -74,9 +33,30 @@ $conn->close();
     </div>
 
     <div class="field">
-      <label class="endereco">Endereço</label>
+      <label class="localtrabalho">Local de Trabalho</label>
       <div class="control">
-        <input class="input" type="text" name="endereco" placeholder="Seu endereço">
+        <input class="input" type="text" name="localtrabalho" placeholder="Seu local de trabalho">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="crm">CRM (Registro Médico)</label>
+      <div class="control">
+        <input class="input" type="text" name="crm" placeholder="Seu número de CRM">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="especificacao">Especialização</label>
+      <div class="control">
+        <div class="select is-fullwidth">
+          <select name="especializacao">
+            <option value="clinico">Clínico Geral</option>
+            <option value="pediatra">Pediatra</option>
+            <option value="cardiologista">Cardiologista</option>
+            <!-- Adicione mais opções conforme necessário -->
+          </select>
+        </div>
       </div>
     </div>
 
@@ -85,7 +65,6 @@ $conn->close();
       <div class="control">
         <input class="input" type="text" name="usuario" placeholder="Seu nome de usuário">
       </div>
-
     </div>
 
     <div class="field">
@@ -94,14 +73,14 @@ $conn->close();
         <input class="input" type="password" name="senha" placeholder="Sua Senha de acesso">
       </div>
     </div>
-    
-    </form>
+
     <div class="field">
       <div class="control">
         <button class="button is-primary is-fullwidth" type="submit" name="submit">Finalizar</button>
       </div>
     </div>
   </div>
-  <script src="cadastro.js"></script>
+</form>
+<script src="cadastro.js"></script>
 </body>
 </html>
