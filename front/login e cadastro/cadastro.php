@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 }
 
 // Verifique se o nome de usuário já existe
-$sqlVerificaUsuario = "SELECT * FROM projetophp.usuarios WHERE nome_usuario = '$nomeUsuario'";
+$sqlVerificaUsuario = "SELECT * FROM projetophp.pacientes WHERE nome_usuario = '$nomeUsuario'";
 $resultUsuario = $conn->query($sqlVerificaUsuario);
 
 if ($resultUsuario->num_rows > 0) {
@@ -26,7 +26,7 @@ if ($resultUsuario->num_rows > 0) {
 }
 
 // Insira os dados no banco de dados
-$sqlInserirUsuario = "INSERT INTO projetophp.usuarios (nome_completo, email, numero_telefone, endereco, nome_usuario,senha) 
+$sqlInserirUsuario = "INSERT INTO projetophp.pacientes (nome_completo, email, numero_telefone, endereco, nome_usuario,senha) 
                       VALUES ('$nomeCompleto', '$email', '$numeroTelefone', '$endereco', '$nomeUsuario','$senha')";
 
 if ($conn->query($sqlInserirUsuario) === TRUE) {
@@ -49,6 +49,7 @@ $conn->close();
   <link rel="stylesheet" href="cadastro.css">
 </head>
 <body>
+  
 <form action="cadastro.php" method="post">
   <div class="container cadastro-container">
     <h1 class="title has-text-centered">Cadastro</h1>

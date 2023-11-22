@@ -1,3 +1,45 @@
+<?php
+include "conexao.php";
+// Capturar os dados do formulário
+if(isset($_POST['submit'])){
+$nomesobrenome = $_POST['nomesobrenome'];
+$email = $_POST['email'];
+$numero = $_POST['numero'];
+$localtrabalho = $_POST['localtrabalho'];
+$crm = $_POST['crm'];
+$especializacao = $_POST['especializacao'];
+$usuario = $_POST['usuario'];
+$senha = $_POST['senha'];
+
+if ($conn->connect_error) {
+  die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+}
+
+// Verifique se o nome de usuário já existe
+$sqlVerificaUsuario = "SELECT * FROM projetophp.medicos WHERE nome_usuario = '$usuario'";
+$resultUsuario = $conn->query($sqlVerificaUsuario);
+
+if ($resultUsuario->num_rows > 0) {
+    echo "Nome de usuário já existe. Escolha outro.";
+    $conn->close();
+    exit();
+}
+
+// Preparar a instrução SQL para inserir os dados no banco de dados
+$sql = "INSERT INTO projetophp.medicos (nomeSobrenome , email, numero_telefone, endereco_de_trabalho, crm, nome_usuario, senha, especialidade)
+        VALUES ('$nomesobrenome', '$email', '$numero', '$localtrabalho', '$crm', '$usuario', '$senha','$especializacao' )";
+
+// Executar a instrução SQL
+if ($conn->query($sql) === TRUE) {
+    echo "Cadastro realizado com sucesso!";
+} else {
+    echo "Erro ao cadastrar: " . $conn->error;
+}
+
+// Fechar a conexão com o banco de dados
+$conn->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -14,7 +56,7 @@
     <div class="field">
       <label class="nomecompleto">Nome e Sobrenome</label>
       <div class="control">
-        <input class="input" type="text" name="nomecompleto" placeholder="Seu nome e Sobrenome">
+        <input class="input" type="text" name="nomesobrenome" placeholder="Seu nome e Sobrenome">
       </div>
     </div>
 
