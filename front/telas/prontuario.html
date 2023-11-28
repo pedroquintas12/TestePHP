@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visualização de Prontuários</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Visualização de Prontuários</h1>
+      <div class="columns">
+        <div class="column is-one-third">
+          <div class="box">
+            <h2 class="subtitle">Paciente 1: Carlos</h2>
+            <p>Prontuário:</p>
+            <div class="content" id="prontuario-carlos">
+              <!-- Aqui será exibido o prontuário -->
+            </div>
+          </div>
+          <!-- Adicione mais blocos de pacientes conforme necessário -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Recupere o prontuário salvo no localStorage e exiba na página de visualização
+    document.getElementById('prontuario-carlos').innerText = localStorage.getItem('prontuario-carlos');
+  </script>
+</body>
+</html>

@@ -43,6 +43,7 @@ verificarPermissao('medico');
             <p>Prontuário:</p>
             <div class="content" name="prontuario">
               <textarea id="prontuario-carlos" class="textarea" placeholder="Editar Prontuário do Carlos..."></textarea>
+              <button onclick="prontuariosalvo()">visualizar prontuario</button>
               <button class="button is-primary" onclick="salvarProntuario('prontuario-carlos')">Salvar</button>
             </div>
           </div>
@@ -57,6 +58,10 @@ verificarPermissao('medico');
       localStorage.setItem(idTextarea, prontuario);
       alert('Prontuário salvo com sucesso!');
     }
+
+    function prontuariosalvo() {
+    window.location.href = "prontuario.html"
+  } 
   </script>
 </body>
 </html>
