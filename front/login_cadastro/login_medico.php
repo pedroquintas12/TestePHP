@@ -10,11 +10,21 @@ if (isset($_POST['submit'])) {
     $resultLogin = $conn->query($sqlVerificaLogin);
 
     if ($resultLogin->num_rows > 0) {
-        print_r( "Login bem-sucedido!");
-    } else {
-      print_r( "nome de usuario ou senha incorretos!");
-    }
+        $row = $resultLogin->fetch_assoc();
+
+        // Iniciar a sessão e definir variáveis de sessão
+        session_start();
+       // Verificar se o usuário é um administrador
+    if ($nomeUsuario == 'ADMIN') {
+      $_SESSION['tipo_usuario'] = 'ADMIN';
+      header("Location: ../../front/gerenciar_usuarios/usuarios.php");
+  } else {
+      $_SESSION['id_medico'] = $row['id_medico'];
+      $_SESSION['tipo_usuario'] = 'medico';
+      header("Location: ../../front/telas/telamedico.php");
 }
+    }
+  }
 ?>
 
 <!DOCTYPE html>

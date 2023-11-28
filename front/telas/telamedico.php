@@ -1,3 +1,28 @@
+<?php
+session_start();
+
+// Função para verificar se o usuário está logado
+function verificarLogin() {
+    if (!isset($_SESSION['id_medico'])) {
+        header("Location: ../../front/login_cadastro/login_medico.php"); // Redirecionar para a página de login se o usuário não estiver logado
+        exit();
+    }
+}
+
+// Função para verificar as permissões do usuário
+function verificarPermissao($tipo_permitido) {
+    if ($_SESSION['tipo_usuario'] !== $tipo_permitido) {
+        echo "Você não tem permissão para acessar esta página.";
+        exit();
+    }
+}
+
+// Verificar se o usuário está logado
+verificarLogin();
+
+// Verificar se o usuário é um paciente
+verificarPermissao('medico');
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
