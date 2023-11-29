@@ -1,23 +1,33 @@
 <?php
 include "../../../front/conexao.php";
+session_start();
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Recuperar os dados enviados pela solicitação AJAX
-    $medico = $_POST['medico'];
-    $horario = $_POST['horario'];
-    $idPaciente = $_POST['idPaciente']; // Supondo que você tenha o ID do paciente disponível
-    $idMedico = $_POST['idMedico']; // Supondo que você tenha o ID do médico disponível
+$horario = $_POST['horario'];
+$idPaciente = $_SESSION['id_paciente'];
+$id_medico = isset($_POST['id_medico']) ? $_POST['id_medico'] : null;
 
-    // Realizar a inserção no banco de dados
-    $sqlInserirConsulta = "INSERT INTO projetophp.agendamentos (id_medico, id_paciente, horario) VALUES ($idMedico, $idPaciente, '$horario')";
-
-    if (mysqli_query($conn, $sqlInserirConsulta)) {
-        echo 'Consulta agendada com sucesso!';
-    } else {
-        echo 'Erro ao agendar consulta: ' . mysqli_error($conn);
-    }
+if ($id_medico === null) {
+    echo "Erro ao agendar: Id do médico não definido.";
 } else {
-    // Responder caso alguém tente acessar diretamente este arquivo PHP
-    echo 'Acesso não autorizado.';
+    // Verificar se o horário está disponível
+    $sql = "SELECT id FROM projetophp.agendamentos WHERE horario = '$horario' AND disponivel = true";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // Horário já agendado, faça o tratamento adequado (ex: exiba uma mensagem de erro)
+        $message = "Horário já agendado. Escolha outro horário.";
+    } else {
+        // Horário disponível, agendar
+        $sql = "INSERT INTO projetophp.agendamentos (medico_id, paciente_id, horario, disponivel) VALUES ('$id_medico', '$idPaciente', '$horario', false)";
+        
+        if ($conn->query($sql) === TRUE) {
+            $message = "Agendamento realizado com sucesso!";
+        } else {
+            $message = "Erro ao agendar: " . $conn->error;
+        }
+    }
 }
+
+header("Location: telapaciente.php?message=" . urlencode($message));
+exit();
 ?>

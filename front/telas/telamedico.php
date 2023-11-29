@@ -26,42 +26,29 @@ verificarPermissao('medico');
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tela do Médico</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <!-- Seu código de cabeçalho aqui -->
 </head>
 <body>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">Pacientes e Prontuários</h1>
-      <div class="columns">
-        <div class="column is-one-third">
-          <div class="box" name="caixa_paciente">
-            <h2 class="subtitle">Paciente 1: Carlos</h2>
-            <p>Atendido pelo Dr. Médico A</p>
-            <p>Prontuário:</p>
-            <div class="content" name="prontuario">
-              <textarea id="prontuario-carlos" class="textarea" placeholder="Editar Prontuário do Carlos..."></textarea>
-              <button onclick="prontuariosalvo()">visualizar prontuario</button>
-              <button class="button is-primary" onclick="salvarProntuario('prontuario-carlos')">Salvar</button>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">Pacientes e Prontuários</h1>
+            <div class="columns">
+                <div class="column is-one-third">
+                    <?php include "consultas_agendadas.php"; ?>
+                </div>
             </div>
-          </div>
-          <!-- Adicione mais blocos de pacientes conforme necessário -->
         </div>
-      </div>
-    </div>
-  </section>
-  <script>
-    function salvarProntuario(idTextarea) {
-      const prontuario = document.getElementById(idTextarea).value;
-      localStorage.setItem(idTextarea, prontuario);
-      alert('Prontuário salvo com sucesso!');
-    }
+    </section>
+    <script>
+        function salvarProntuario(idTextarea) {
+            const prontuario = document.getElementById(idTextarea).value;
+            localStorage.setItem(idTextarea, prontuario);
+            alert('Prontuário salvo com sucesso!');
+        }
 
-    function prontuariosalvo() {
-    window.location.href = "prontuario.html"
-  } 
-  </script>
+        function prontuariosalvo() {
+            window.location.href = "prontuario.html"
+        }
+    </script>
 </body>
 </html>
