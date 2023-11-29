@@ -31,6 +31,7 @@ $sql = "INSERT INTO projetophp.medicos (nomeSobrenome , email, numero_telefone, 
 
 // Executar a instrução SQL
 if ($conn->query($sql) === TRUE) {
+  header("Location: ../../front/login_cadastro/login_medico.php");
     echo "Cadastro realizado com sucesso!";
 } else {
     echo "Erro ao cadastrar: " . $conn->error;

@@ -13,8 +13,8 @@
       <div class="content">
         <p>Escolha seu tipo de login:</p>
         <ul>
-          <li><a href="login_paciente.html">Login Paciente</a></li>
-          <li><a href="login_medico.html">Login Médico</a></li>
+          <li><a href="login.php">Login Paciente</a></li>
+          <li><a href="login_medico.php">Login Médico</a></li>
         </ul>
       </div>
     </div>

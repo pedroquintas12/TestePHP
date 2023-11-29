@@ -31,6 +31,8 @@ $sqlInserirUsuario = "INSERT INTO projetophp.pacientes (nome_completo, email, nu
 
 if ($conn->query($sqlInserirUsuario) === TRUE) {
     echo "Cadastro realizado com sucesso!";
+    header("Location: ../../front/login_cadastro/login.php");
+
 } else {
     echo "Erro ao cadastrar: " . $conn->error;
 }
