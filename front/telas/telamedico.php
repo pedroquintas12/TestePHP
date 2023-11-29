@@ -4,7 +4,7 @@ session_start();
 // Função para verificar se o usuário está logado
 function verificarLogin() {
     if (!isset($_SESSION['id_medico'])) {
-        header("Location: ../../front/login_cadastro/login_medico.php"); // Redirecionar para a página de login se o usuário não estiver logado
+        header("Location: ../../front/login_cadastro/login.php"); // Redirecionar para a página de login se o usuário não estiver logado
         exit();
     }
 }

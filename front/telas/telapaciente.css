@@ -7,3 +7,8 @@
   .medico-card:hover {
     transform: scale(1.05);
   }
+  /* Adicione essas regras para realçar visualmente o horário selecionado */
+.horario-selecionado {
+  background-color: #4CAF50; /* Cor de fundo verde */
+  color: white; /* Cor do texto branco */
+}

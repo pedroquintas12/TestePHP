@@ -1,5 +1,5 @@
 <?php
-include "conexao.php";
+include "../../../front/conexao.php";
 
 if (isset($_POST['submit'])) {
   $nomeUsuario = $_POST['usuario'];

@@ -24,7 +24,7 @@ if ($_SESSION['tipo_usuario'] !== 'ADMIN') {
     <div class="container">
       <h1 class="title">Gerenciar Usuários</h1>
   <?php
-  include "conexao.php";
+include "../../../front/conexao.php";
 
       $sql2 = "SELECT
       id_paciente,

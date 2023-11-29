@@ -1,5 +1,5 @@
 <?php
-include "conexao.php";
+include "../../../front/conexao.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $usuario_id = $_POST["usuario_id"];

@@ -1,6 +1,6 @@
 <?php
 
-include "conexao.php";
+include "../../../front/conexao.php";
 if(isset($_POST['submit'])){
 // Recupere os dados do formulário
 $nomeCompleto = $_POST['nomecompleto'];
