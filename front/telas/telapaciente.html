@@ -18,23 +18,45 @@
       <div class="columns is-multiline">
         <!-- Card de Médico -->
         <div class="column is-one-third">
-          <div class="medico-card card" name="medico1" onclick="mostrarHorarios('Dr. Carlos Augusto')">
+          <div class="medico-card card">
             <div class="card-content">
               <p class="title">Dr. Carlos Augusto</p>
               <p class="subtitle">Clínico Geral</p>
               <p>Horário: Seg-Sex, 9h - 17h</p>
               <p>Local: Hospital da Restauração / Clínico Geral</p>
             </div>
+            <form action="seu_script_php.php" method="post">
+              <label for="hora1">09:00</label>
+              <input type="radio" id="hora1" name="horario" value="09:00">
+              <label for="hora2">10:00</label>
+              <input type="radio" id="hora2" name="horario" value="10:00">
+              <label for="hora3">11:00</label>
+              <input type="radio" id="hora3" name="horario" value="11:00">
+              <!-- Adicione mais horários conforme necessário -->
+
+              <button class="button is-primary" type="submit">Agendar</button>
+            </form>
           </div>
         </div>
         <div class="column is-one-third">
-          <div class="medico-card card" name="medico2" onclick="mostrarHorarios('Dr. Pedro Quintas')">
+          <div class="medico-card card">
             <div class="card-content">
               <p class="title">Dr. Pedro Quintas</p>
               <p class="subtitle">Pediatra</p>
               <p>Horário: Seg-Sab, 9h - 15h</p>
               <p>Local: Hospital Santa Joana / Pediatra</p>
             </div>
+            <form action="seu_script_php.php" method="post">
+              <label for="hora4">09:00</label>
+              <input type="radio" id="hora4" name="horario" value="09:00">
+              <label for="hora5">10:00</label>
+              <input type="radio" id="hora5" name="horario" value="10:00">
+              <label for="hora6">11:30</label>
+              <input type="radio" id="hora6" name="horario" value="11:30">
+              <!-- Adicione mais horários conforme necessário -->
+
+              <button class="button is-primary" type="submit">Agendar</button>
+            </form>
           </div>
         </div>
         <!-- Adicione mais cards para outros médicos -->
@@ -42,53 +64,5 @@
     </div>
   </section>
 
-  <section class="section" id="horariosDisponiveis" style="display: none;">
-    <div class="container">
-      <h2 class="subtitle" id="medicoSelecionado"></h2>
-      <div class="columns is-multiline" id="listaHorarios">
-        <!-- Os horários serão adicionados aqui -->
-      </div>
-    </div>
-  </section>
-
-  <script>
-    // Definição dos horários por médico
-    const horariosMedicos = {
-      'Dr. Carlos Augusto': ['09:00', '10:00', '11:00', '14:00','16:00'],
-      'Dr. Pedro Quintas': ['09:00', '10:00', '11:30', '13:30']
-      // Adicione mais médicos e horários conforme necessário
-    };
-
-    function mostrarHorarios(medico) {
-      const horarios = horariosMedicos[medico];
-
-      // Mostrar os horários disponíveis
-      const horariosDisponiveis = document.getElementById('horariosDisponiveis');
-      horariosDisponiveis.style.display = 'block';
-      
-      // Mostrar o nome do médico selecionado
-      const medicoSelecionado = document.getElementById('medicoSelecionado');
-      medicoSelecionado.textContent = `Horários Disponíveis - ${medico}`;
-      
-      // Limpar a lista de horários
-      const listaHorarios = document.getElementById('listaHorarios');
-      listaHorarios.innerHTML = '';
-      
-      // Adicionar os horários como botões clicáveis
-      horarios.forEach(horario => {
-        const novoHorario = document.createElement('div');
-        novoHorario.classList.add('column', 'is-one-quarter');
-        novoHorario.innerHTML = `
-          <button class="button is-primary is-fullwidth" onclick="agendarConsulta('${medico}', '${horario}')">${horario}</button>
-        `;
-        listaHorarios.appendChild(novoHorario);
-      });
-    }
-
-    function agendarConsulta(medico, horario) {
-      alert(`Consulta agendada com ${medico} para as ${horario}`);
-      // Aqui você pode adicionar lógica para agendar a consulta no sistema
-    }
-  </script>
 </body>
 </html>
