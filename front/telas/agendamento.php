@@ -1,33 +1,31 @@
 <?php
-include "../../../front/conexao.php";
+// Obter dados do formulário
 session_start();
+include "../../../front/conexao.php";
 
 $horario = $_POST['horario'];
 $idPaciente = $_SESSION['id_paciente'];
-$id_medico = isset($_POST['id_medico']) ? $_POST['id_medico'] : null;
+$id_medico = $_POST['id_medico'];
 
-if ($id_medico === null) {
-    echo "Erro ao agendar: Id do médico não definido.";
+// Verificar se o horário está disponível
+$sql = "SELECT id FROM projetophp.agendamentos WHERE horario = '$horario' AND medico_id = $id_medico AND disponivel != 1";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    // Horário já agendado, faça o tratamento adequado (ex: exiba uma mensagem de erro)
+    $message = "Horário já agendado. Escolha outro horário.";
 } else {
-    // Verificar se o horário está disponível
-    $sql = "SELECT id FROM projetophp.agendamentos WHERE horario = '$horario' AND disponivel = true";
-    $result = $conn->query($sql);
+    // Horário disponível, agendar
+    $sql = "INSERT INTO projetophp.agendamentos (medico_id, paciente_id, horario, disponivel) VALUES ($id_medico, $idPaciente, '$horario', 0 )";
 
-    if ($result->num_rows > 0) {
-        // Horário já agendado, faça o tratamento adequado (ex: exiba uma mensagem de erro)
-        $message = "Horário já agendado. Escolha outro horário.";
+    if ($conn->query($sql) === TRUE) {
+        $message = "Agendamento realizado com sucesso!";
     } else {
-        // Horário disponível, agendar
-        $sql = "INSERT INTO projetophp.agendamentos (medico_id, paciente_id, horario, disponivel) VALUES ('$id_medico', '$idPaciente', '$horario', false)";
-        
-        if ($conn->query($sql) === TRUE) {
-            $message = "Agendamento realizado com sucesso!";
-        } else {
-            $message = "Erro ao agendar: " . $conn->error;
-        }
+        $message = "Erro ao agendar: " . $conn->error;
     }
 }
 
+// Redirecionar de volta à página do médico com a mensagem
 header("Location: telapaciente.php?message=" . urlencode($message));
 exit();
 ?>
