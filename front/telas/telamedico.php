@@ -20,11 +20,15 @@ function verificarPermissao($tipo_permitido) {
 // Verificar se o usuário está logado
 verificarLogin();
 
-// Verificar se o usuário é um paciente
+// Verificar se o usuário é um médico
 verificarPermissao('medico');
 
 $id_medico = $_SESSION['id_medico'];
+
+include "../../../front/conexao.php";
+
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -42,7 +46,7 @@ $id_medico = $_SESSION['id_medico'];
                     <?php
                     include "../../../front/conexao.php";
 
-                    $sql = "SELECT c.id, c.horario, p.nome_completo AS nome_paciente, m.nomeSobrenome AS nome_medico, c.prontuario
+                    $sql = "SELECT c.id, c.horario, c.data_consulta, p.nome_completo AS nome_paciente, m.nomeSobrenome AS nome_medico, c.prontuario, c.tempo_consulta
                     FROM projetophp.agendamentos AS c
                     INNER JOIN projetophp.pacientes AS p ON c.paciente_id = p.id_paciente
                     INNER JOIN projetophp.medicos AS m ON c.medico_id = m.id_medico where medico_id = $id_medico";
@@ -54,6 +58,11 @@ $id_medico = $_SESSION['id_medico'];
                             echo "<div class='box'>";
                             echo "<h2 class='subtitle'>Consulta #" . $row['id'] . ": " . $row['nome_paciente'] . "</h2>";
                             echo "<p>Horário: " . $row['horario'] . "</p>";
+                            echo "<p>Data: " . $row['data_consulta'] . "</p>";
+                            
+                            // Exibir a duração da consulta
+                            echo "<p>Duração: " . gmdate("H:i:s", $row['tempo_consulta']) . "</p>";
+                    
                             echo "<p>Atendido pelo Dr. " . $row['nome_medico'] . "</p>";
                             echo "<p>Prontuário:</p>";
                             echo "<div class='content' name='prontuario'>";
@@ -65,7 +74,7 @@ $id_medico = $_SESSION['id_medico'];
                     } else {
                         echo "<p>Não há consultas agendadas.</p>";
                     }
-
+                    
                     $conn->close();
                     ?>
                 </div>
@@ -73,12 +82,9 @@ $id_medico = $_SESSION['id_medico'];
         </div>
     </section>
     <script>
-
         function prontuariosalvo(url) {
-        window.location.href = url;
-    }
-
-
+            window.location.href = url;
+        }
     </script>
 </body>
 </html>

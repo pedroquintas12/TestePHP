@@ -82,6 +82,8 @@ if (mysqli_num_rows($resultado) > 0) {
 ?>
         
         </div>
+      <button class='button is-primary' onclick= telapacientefinal() >ir para a tela de consultas</button>
+
       </div>
       <?php
       if (isset($_GET['message'])) {
@@ -89,6 +91,13 @@ if (mysqli_num_rows($resultado) > 0) {
           echo "<p>$message</p>";
       }
       ?>
+      <Script>
+        function telapacientefinal(){
+
+          window.location.href = "telapacientefinal.php";
+
+        }
+      </Script>
     </section>
   </body>
   </html>

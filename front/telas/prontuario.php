@@ -28,59 +28,70 @@ $id_medico = $_SESSION['id_medico'];
 include "../../../front/conexao.php";
 
 // Recupera o prontuário do paciente selecionado
+// Recupera o prontuário do paciente selecionado
 if (isset($_GET['id_consulta'])) {
+  $idConsulta = $_GET['id_consulta'];
 
-  $idConsulta = $_GET['id_consulta']; // Correção aqui
+  // Salva o tempo inicial da consulta
+  $_SESSION['tempo_inicial_consulta'] = time();
 
   $sql = "SELECT a.prontuario, p.nome_completo AS nome_paciente
-  FROM projetophp.agendamentos AS a
-  INNER JOIN projetophp.pacientes AS p ON a.paciente_id = p.id_paciente
-  WHERE a.id = ? AND a.medico_id = ?";
-    
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("ii", $idConsulta, $id_medico);
+          FROM projetophp.agendamentos AS a
+          INNER JOIN projetophp.pacientes AS p ON a.paciente_id = p.id_paciente
+          WHERE a.id = ? AND a.medico_id = ?";
 
-$stmt->execute();
-$result = $stmt->get_result();
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("ii", $idConsulta, $id_medico);
 
-if ($result === false) {
-die('Erro na execução da consulta: ' . $stmt->error);
-}
+  $stmt->execute();
+  $result = $stmt->get_result();
 
-if ($result->num_rows > 0) {
-$row = $result->fetch_assoc();
-$prontuario_paciente = $row['prontuario'];
-$nome_paciente = $row['nome_paciente'];
-} else {
-// Redireciona se a consulta não pertencer ao médico logado
-header("Location: telamedico.php");
-exit();
-}
+  if ($result === false) {
+      die('Erro na execução da consulta: ' . $stmt->error);
+  }
 
-$stmt->close();
+  if ($result->num_rows > 0) {
+      $row = $result->fetch_assoc();
+      $prontuario_paciente = $row['prontuario'];
+      $nome_paciente = $row['nome_paciente'];
+  } else {
+      // Redireciona se a consulta não pertencer ao médico logado
+      header("Location: telamedico.php");
+      exit();
+  }
 
+  $stmt->close();
 } else {
   // Redireciona se o ID da consulta não estiver definido
   header("Location: telamedico.php");
   exit();
 }
-// Salva o prontuário no banco de dados
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $prontuario_novo = $_POST['prontuario_novo'];
 
-    $updateSql = "UPDATE projetophp.agendamentos SET prontuario = ? WHERE id = ?";
-    $stmt = $conn->prepare($updateSql);
-    $stmt->bind_param("si", $prontuario_novo, $idConsulta);
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $prontuario_novo = $_POST['prontuario_novo'];
+
+  // Calcula a duração da consulta
+  if (isset($_SESSION['tempo_inicial_consulta'])) {
+      $tempo_inicial = $_SESSION['tempo_inicial_consulta'];
+      $tempo_final = time();
+      $duracao_consulta = $tempo_final - $tempo_inicial;
+
+      // Salva a duração no banco de dados
+      $updateSql = "UPDATE projetophp.agendamentos SET prontuario = ?, tempo_consulta = ? WHERE id = ?";
+      $stmt = $conn->prepare($updateSql);
+      $stmt->bind_param("sii", $prontuario_novo, $duracao_consulta, $idConsulta);
       $stmt->execute();
 
-    // Recarrega a página após salvar o prontuário
-    header("Location: prontuario.php?id_consulta=$id_consulta");
-    exit();
+      unset($_SESSION['tempo_inicial_consulta']); // Limpa a variável de tempo inicial após salvar
+  }
+
+  // Recarrega a página após salvar o prontuário
+  header("Location: prontuario.php");
+  exit();
 }
 
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -96,11 +107,11 @@ $conn->close();
             <div class="columns">
                 <div class="column is-one-third">
                     <div class="box">
-                    <h2 class="subtitle">Paciente: <?php echo $nome_paciente; ?></h2>
+                        <h2 class="subtitle">Paciente: <?php echo $nome_paciente; ?></h2>
                         <form method="post">
                             <p>Prontuário:</p>
                             <div class="content">
-                                  <textarea class='textarea' name='prontuario_novo' placeholder='Editar Prontuário do <?php echo $nome_paciente; ?>'><?php echo $prontuario_paciente; ?></textarea>
+                                <textarea class='textarea' name='prontuario_novo' placeholder='Editar Prontuário do <?php echo $nome_paciente; ?>'><?php echo $prontuario_paciente; ?></textarea>
                             </div>
                             <button type="submit" class="button is-primary">Salvar</button>
                         </form>
