@@ -27,7 +27,11 @@ $id_medico = $_SESSION['id_medico'];
 
 include "../../../front/conexao.php";
 
-// Recupera o prontuário do paciente selecionado
+// Inicia o tempo de prontuário
+if (!isset($_SESSION['tempo_inicial_prontuario'])) {
+    $_SESSION['tempo_inicial_prontuario'] = time();
+}
+
 // Recupera o prontuário do paciente selecionado
 if (isset($_GET['id_consulta'])) {
   $idConsulta = $_GET['id_consulta'];
@@ -68,26 +72,30 @@ if (isset($_GET['id_consulta'])) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  $prontuario_novo = $_POST['prontuario_novo'];
+    $prontuario_novo = $_POST['prontuario_novo'];
 
-  // Calcula a duração da consulta
-  if (isset($_SESSION['tempo_inicial_consulta'])) {
-      $tempo_inicial = $_SESSION['tempo_inicial_consulta'];
-      $tempo_final = time();
-      $duracao_consulta = $tempo_final - $tempo_inicial;
+    // Calcula a duração do prontuário
+if (isset($_SESSION['tempo_inicial_prontuario'])) {
+    $tempo_inicial_prontuario = $_SESSION['tempo_inicial_prontuario'];
+    $tempo_final_prontuario = time();
+    $duracao_prontuario = $tempo_final_prontuario - $tempo_inicial_prontuario;
 
-      // Salva a duração no banco de dados
-      $updateSql = "UPDATE projetophp.agendamentos SET prontuario = ?, tempo_consulta = ? WHERE id = ?";
-      $stmt = $conn->prepare($updateSql);
-      $stmt->bind_param("sii", $prontuario_novo, $duracao_consulta, $idConsulta);
-      $stmt->execute();
+    // Obtém a data atual
+    $data_modificacao = date('Y-m-d H:i:s');
 
-      unset($_SESSION['tempo_inicial_consulta']); // Limpa a variável de tempo inicial após salvar
-  }
+    // Salva a duração e a data de modificação no banco de dados
+    $updateSql = "UPDATE projetophp.agendamentos SET prontuario = ?, tempo_consulta = tempo_consulta + ?, data_consulta = ? WHERE id = ?";
+    $stmt = $conn->prepare($updateSql);
+    $stmt->bind_param("sisi", $prontuario_novo, $duracao_prontuario, $data_modificacao, $idConsulta);
+    $stmt->execute();
 
-  // Recarrega a página após salvar o prontuário
-  header("Location: prontuario.php");
-  exit();
+    unset($_SESSION['tempo_inicial_prontuario']); // Limpa a variável de tempo inicial após salvar
+}
+
+
+    // Recarrega a página após salvar o prontuário
+    header("Location: telamedico.php");
+    exit();
 }
 
 $conn->close();

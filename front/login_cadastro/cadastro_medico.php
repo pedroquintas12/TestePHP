@@ -1,44 +1,107 @@
 <?php
 include "../../../front/conexao.php";
+
+// Inicializa a sessão (se ainda não estiver iniciada)
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Função para adicionar mensagens de erro à sessão
+function addError($message) {
+    $_SESSION['errors'][] = "<span style='color: red;'>$message</span>";
+}
+
 // Capturar os dados do formulário
 if(isset($_POST['submit'])){
-$nomesobrenome = $_POST['nomesobrenome'];
-$email = $_POST['email'];
-$numero = $_POST['numero'];
-$localtrabalho = $_POST['localtrabalho'];
-$crm = $_POST['crm'];
-$especializacao = $_POST['especializacao'];
-$usuario = $_POST['usuario'];
-$senha = $_POST['senha'];
+    // Recuperar os dados do formulário
+    $nomesobrenome = $_POST['nomesobrenome'];
+    $email = $_POST['email'];
+    $numero = $_POST['numero'];
+    $localtrabalho = $_POST['localtrabalho'];
+    $crm = $_POST['crm'];
+    $especializacao = $_POST['especializacao'];
+    $usuario = $_POST['usuario'];
+    $senha = $_POST['senha'];
 
-if ($conn->connect_error) {
-  die("Erro na conexão com o banco de dados: " . $conn->connect_error);
-}
+    // Validar o nome de usuário
+    if (empty($usuario)) {
+        addError("Por favor, preencha o campo Nome de Usuário.");
+    } else {
+        // Verificar a conexão
+        if ($conn->connect_error) {
+            die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+        }
 
-// Verifique se o nome de usuário já existe
-$sqlVerificaUsuario = "SELECT * FROM projetophp.medicos WHERE nome_usuario = '$usuario'";
-$resultUsuario = $conn->query($sqlVerificaUsuario);
+        // Verificar se o nome de usuário já existe
+        $sqlVerificaUsuario = "SELECT * FROM projetophp.medicos WHERE nome_usuario = '$usuario'";
+        $resultUsuario = $conn->query($sqlVerificaUsuario);
 
-if ($resultUsuario->num_rows > 0) {
-    echo "Nome de usuário já existe. Escolha outro.";
-    $conn->close();
-    exit();
-}
+        if ($resultUsuario->num_rows > 0) {
+            addError("Nome de usuário já existe. Escolha outro.");
+        }
+    }
 
-// Preparar a instrução SQL para inserir os dados no banco de dados
-$sql = "INSERT INTO projetophp.medicos (nomeSobrenome , email, numero_telefone, endereco_de_trabalho, crm, nome_usuario, senha, especialidade)
-        VALUES ('$nomesobrenome', '$email', '$numero', '$localtrabalho', '$crm', '$usuario', '$senha','$especializacao' )";
+    // Validar o nome e sobrenome
+    if (empty($nomesobrenome)) {
+        addError("Por favor, preencha o campo Nome e Sobrenome.");
+    }
 
-// Executar a instrução SQL
-if ($conn->query($sql) === TRUE) {
-  header("Location: ../../front/login_cadastro/login_medico.php");
-    echo "Cadastro realizado com sucesso!";
-} else {
-    echo "Erro ao cadastrar: " . $conn->error;
-}
+    // Validar o email
+    if (empty($email)) {
+        addError("Por favor, preencha o campo Email.");
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        addError("Formato de email inválido.");
+    }
 
-// Fechar a conexão com o banco de dados
-$conn->close();
+    // Validar o número de telefone
+    if (empty($numero)) {
+        addError("Por favor, preencha o campo Número de Telefone.");
+    }
+
+    // Validar o local de trabalho
+    if (empty($localtrabalho)) {
+        addError("Por favor, preencha o campo Local de Trabalho.");
+    }
+
+    // Validar o CRM
+    if (empty($crm)) {
+        addError("Por favor, preencha o campo CRM (Registro Médico).");
+    }
+
+    // Validar a especialização
+    if (empty($especializacao)) {
+        addError("Por favor, selecione uma Especialização.");
+    }
+
+    // Validar a senha
+    if (empty($senha)) {
+        addError("Por favor, preencha o campo Senha.");
+    }
+
+    // Verificar se há erros na validação
+    if (!empty($_SESSION['errors'])) {
+        // Se houver erros, exibir as mensagens de erro no local apropriado no formulário
+        echo "<div class='errors'>";
+        foreach ($_SESSION['errors'] as $error) {
+            echo $error . "<br>";
+        }
+        echo "</div>";
+        unset($_SESSION['errors']); // Remover a variável 'errors' da sessão
+    } else {
+        // Inserir os dados no banco de dados
+        $sqlInserirMedico = "INSERT INTO projetophp.medicos (nomeSobrenome, email, numero_telefone, endereco_de_trabalho, crm, nome_usuario, senha, especialidade)
+                            VALUES ('$nomesobrenome', '$email', '$numero', '$localtrabalho', '$crm', '$usuario', '$senha', '$especializacao')";
+
+        if ($conn->query($sqlInserirMedico) === TRUE) {
+            echo "Cadastro realizado com sucesso!";
+            header("Location: ../../front/login_cadastro/login.php");
+            exit(); // Adicionado para evitar a execução de código adicional após o redirecionamento
+        } else {
+            echo "Erro ao cadastrar: " . $conn->error;
+        }
+
+        $conn->close();
+    }
 }
 ?>
 <!DOCTYPE html>

@@ -1,39 +1,68 @@
 <?php
 include "../../../front/conexao.php";
 
+// Função para adicionar mensagens de erro à sessão
+function addError($message) {
+    $_SESSION['errors'][] = "<span style='color: red;'>$message</span>";
+}
+
 if (isset($_POST['submit'])) {
-  $nomeUsuario = $_POST['usuario'];
-  $senha = $_POST['senha'];
+    $nomeUsuario = $_POST['usuario'];
+    $senha = $_POST['senha'];
 
-  // Consulta para verificar se o nome de usuário e a senha correspondem
-  $sqlVerificaLoginMedico = "SELECT * FROM projetophp.medicos WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha'";
-  $resultLoginMedico = $conn->query($sqlVerificaLoginMedico);
+    // Iniciar a sessão e definir variáveis de sessão
+    session_start();
 
-  $sqlVerificaLoginPaciente = "SELECT * FROM projetophp.pacientes WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha'";
-  $resultLoginPaciente = $conn->query($sqlVerificaLoginPaciente);
+    // Validar o nome de usuário
+    if (empty($nomeUsuario)) {
+        addError("Por favor, preencha o campo Nome de Usuário.");
+    }
 
-  // Iniciar a sessão e definir variáveis de sessão
-  session_start();
+    // Validar a senha
+    if (empty($senha)) {
+        addError("Por favor, preencha o campo Senha.");
+    }
 
-  // Verificar se o usuário é um administrador
-  if ($nomeUsuario == 'ADMIN') {
-      $_SESSION['tipo_usuario'] = 'ADMIN';
-      header("Location: ../../front/gerenciar_usuarios/usuarios.php");
-  } elseif ($resultLoginMedico->num_rows > 0) {
-      $rowMedico = $resultLoginMedico->fetch_assoc();
-      $_SESSION['id_medico'] = $rowMedico['id_medico'];
-      $_SESSION['tipo_usuario'] = 'medico';
-      header("Location: ../../front/telas/telamedico.php");
-  } elseif ($resultLoginPaciente->num_rows > 0) {
-      $rowPaciente = $resultLoginPaciente->fetch_assoc();
-      $_SESSION['id_paciente'] = $rowPaciente['id_paciente'];
-      $_SESSION['tipo_usuario'] = 'paciente';
-      header("Location: ../../front/telas/telapaciente.php");
-  } else {
-      // Usuário não encontrado ou senha incorreta
-      // Adicione aqui a lógica para lidar com tentativas de login mal-sucedidas
-      echo "Usuário ou senha incorretos. Tente novamente.";
-  }
+    // Verificar se há erros na validação
+    if (!empty($_SESSION['errors'])) {
+        // Se houver erros, exibir as mensagens de erro no local apropriado no formulário
+        echo "<div class='errors'>";
+        foreach ($_SESSION['errors'] as $error) {
+            echo $error . "<br>";
+        }
+        echo "</div>";
+        unset($_SESSION['errors']); // Remover a variável 'errors' da sessão
+    } else {
+        // Consulta para verificar se o nome de usuário e a senha correspondem
+        $sqlVerificaLoginMedico = "SELECT * FROM projetophp.medicos WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha'";
+        $resultLoginMedico = $conn->query($sqlVerificaLoginMedico);
+
+        $sqlVerificaLoginPaciente = "SELECT * FROM projetophp.pacientes WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha'";
+        $resultLoginPaciente = $conn->query($sqlVerificaLoginPaciente);
+
+        // Verificar se o usuário é um administrador
+        if ($nomeUsuario == 'ADMIN') {
+            $_SESSION['tipo_usuario'] = 'ADMIN';
+            header("Location: ../../front/gerenciar_usuarios/usuarios.php");
+            exit(); // Adicionado para evitar a execução de código adicional após o redirecionamento
+        } elseif ($resultLoginMedico->num_rows > 0) {
+            $rowMedico = $resultLoginMedico->fetch_assoc();
+            $_SESSION['id_medico'] = $rowMedico['id_medico'];
+            $_SESSION['tipo_usuario'] = 'medico';
+            header("Location: ../../front/telas/telamedico.php");
+            exit(); // Adicionado para evitar a execução de código adicional após o redirecionamento
+        } elseif ($resultLoginPaciente->num_rows > 0) {
+            $rowPaciente = $resultLoginPaciente->fetch_assoc();
+            $_SESSION['id_paciente'] = $rowPaciente['id_paciente'];
+            $_SESSION['tipo_usuario'] = 'paciente';
+            header("Location: ../../front/telas/telapaciente.php");
+            exit(); // Adicionado para evitar a execução de código adicional após o redirecionamento
+        } else {
+            // Usuário não encontrado ou senha incorreta
+            // Adicione aqui a lógica para lidar com tentativas de login mal-sucedidas
+            echo ("Usuário ou senha incorretos. Tente novamente.");
+        }
+    }
 }
 ?>
 

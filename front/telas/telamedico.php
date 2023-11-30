@@ -61,7 +61,7 @@ include "../../../front/conexao.php";
                             echo "<p>Data: " . $row['data_consulta'] . "</p>";
                             
                             // Exibir a duração da consulta
-                            echo "<p>Duração: " . gmdate("H:i:s", $row['tempo_consulta']) . "</p>";
+                            echo "<p>Duração Prontuário: " . gmdate("H:i:s", $row['tempo_consulta']) . "</p>";
                     
                             echo "<p>Atendido pelo Dr. " . $row['nome_medico'] . "</p>";
                             echo "<p>Prontuário:</p>";
