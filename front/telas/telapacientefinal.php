@@ -60,7 +60,8 @@ include "../../../front/conexao.php";
 
             <?php
             // Recupera os detalhes dos atendimentos
-            $sqlDetalhes = "SELECT m.nomeSobrenome AS nome_medico, m.especialidade, m.endereco_de_trabalho AS local_atendimento, c.horario, c.prontuario, c.id
+            $sqlDetalhes = "SELECT m.nomeSobrenome AS nome_medico, m.especialidade, m.endereco_de_trabalho AS local_atendimento,
+                             c.horario, c.prontuario, c.id, c.tempo_consulta
                             FROM projetophp.agendamentos AS c
                             INNER JOIN projetophp.medicos AS m ON c.medico_id = m.id_medico
                             WHERE c.paciente_id = $id_paciente";
@@ -75,6 +76,7 @@ include "../../../front/conexao.php";
                     $especialidade = $rowDetalhes['especialidade'];
                     $local_atendimento = $rowDetalhes['local_atendimento'];
                     $horario_atendimento = $rowDetalhes['horario'];
+                    $tempo_consulta = $rowDetalhes ['tempo_consulta'];
                     $prontuario_medico = $rowDetalhes['prontuario'];
                     $id_consulta = $rowDetalhes['id'];
 
@@ -96,6 +98,8 @@ include "../../../front/conexao.php";
                             <p><strong>Especialidade:</strong> <?php echo $especialidade; ?></p>
                             <p><strong>Local:</strong> <?php echo $local_atendimento; ?></p>
                             <p><strong>Horário:</strong> <?php echo $horario_atendimento; ?></p>
+                         <?php echo  "<p><strong>Tempo de consulta: </strong>". gmdate("H:i:s", $tempo_consulta) . "</p>"?>
+
                         </div>
                     </div>
 
