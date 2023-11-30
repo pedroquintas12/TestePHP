@@ -42,10 +42,10 @@ $id_medico = $_SESSION['id_medico'];
                     <?php
                     include "../../../front/conexao.php";
 
-                    $sql = "SELECT c.id, c.horario, p.nome_completo AS nome_paciente, m.nomeSobrenome AS nome_medico
-                            FROM projetophp.agendamentos AS c
-                            INNER JOIN projetophp.pacientes AS p ON c.paciente_id = p.id_paciente
-                            INNER JOIN projetophp.medicos AS m ON c.medico_id = m.id_medico where medico_id = $id_medico ";
+                    $sql = "SELECT c.id, c.horario, p.nome_completo AS nome_paciente, m.nomeSobrenome AS nome_medico, c.prontuario
+                    FROM projetophp.agendamentos AS c
+                    INNER JOIN projetophp.pacientes AS p ON c.paciente_id = p.id_paciente
+                    INNER JOIN projetophp.medicos AS m ON c.medico_id = m.id_medico where medico_id = $id_medico";
 
                     $result = $conn->query($sql);
 
@@ -57,8 +57,8 @@ $id_medico = $_SESSION['id_medico'];
                             echo "<p>Atendido pelo Dr. " . $row['nome_medico'] . "</p>";
                             echo "<p>Prontuário:</p>";
                             echo "<div class='content' name='prontuario'>";
-                            echo "<textarea class='textarea' placeholder='Editar Prontuário do " . $row['nome_paciente'] . "...'></textarea>";
-                            echo "<button onclick='prontuariosalvo()'>Visualizar Prontuário</button>";
+                            echo "<p>". $row['prontuario'] ."<p>";
+                            echo "<button onclick='prontuariosalvo(\"prontuario.php?id_consulta=" . $row['id'] . "\")'>Editar prontuário </button>";
                             echo "</div>";
                             echo "</div>";
                         }
@@ -73,15 +73,12 @@ $id_medico = $_SESSION['id_medico'];
         </div>
     </section>
     <script>
-        function salvarProntuario(idTextarea) {
-            const prontuario = document.getElementById(idTextarea).value;
-            localStorage.setItem(idTextarea, prontuario);
-            alert('Prontuário salvo com sucesso!');
-        }
 
-        function prontuariosalvo() {
-            window.location.href = "prontuario.html";
-        }
+        function prontuariosalvo(url) {
+        window.location.href = url;
+    }
+
+
     </script>
 </body>
 </html>

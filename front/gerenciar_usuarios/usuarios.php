@@ -2,12 +2,16 @@
 // Inicie a sessão (certifique-se de chamar session_start() antes de qualquer saída HTML)
 session_start();
 
-// Verifique se o usuário está logado como ADMIN
-if ($_SESSION['tipo_usuario'] !== 'ADMIN') {
-  // Se não for um administrador, redirecione para uma página de erro ou exiba uma mensagem de erro
-  echo "<p>Você não tem permissão para acessar esta página. Faça o login como ADMIN.</p>";
-  exit();
+// Função para verificar as permissões do usuário
+function verificarPermissao($tipo_permitido) {
+  if ($_SESSION['tipo_usuario'] !== $tipo_permitido) {
+      echo "Você não tem permissão para acessar esta página.";
+      exit();
+  }
 }
+
+// Verificar se o usuário é um paciente
+verificarPermissao('ADMIN');
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
