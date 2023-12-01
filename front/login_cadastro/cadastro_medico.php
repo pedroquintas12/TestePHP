@@ -32,13 +32,19 @@ if(isset($_POST['submit'])){
             die("Erro na conexão com o banco de dados: " . $conn->connect_error);
         }
 
-        // Verificar se o nome de usuário já existe
-        $sqlVerificaUsuario = "SELECT * FROM projetophp.medicos WHERE nome_usuario = '$usuario'";
-        $resultUsuario = $conn->query($sqlVerificaUsuario);
-
-        if ($resultUsuario->num_rows > 0) {
+        $sqlVerificaUsuarioMedico = "SELECT * FROM projetophp.medicos WHERE nome_usuario = '$usuario'";
+        $resultUsuarioMedico = $conn->query($sqlVerificaUsuarioMedico);
+        
+        // Verificar se o nome de usuário já existe em pacientes
+        $sqlVerificaUsuarioPaciente = "SELECT * FROM projetophp.pacientes WHERE nome_usuario = '$usuario'";
+        $resultUsuarioPaciente = $conn->query($sqlVerificaUsuarioPaciente);
+        
+        // Verificar se o nome de usuário já existe em ambas as tabelas
+        if ($resultUsuarioMedico->num_rows > 0) {
             addError("Nome de usuário já existe. Escolha outro.");
-        }
+        } elseif ($resultUsuarioPaciente->num_rows > 0) {
+            addError("Nome de usuário já existe. Escolha outro.");
+        } 
     }
 
     // Validar o nome e sobrenome
