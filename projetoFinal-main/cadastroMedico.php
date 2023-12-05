@@ -164,7 +164,7 @@ if(isset($_POST['submit'])){
                             <option value="Implantodontia">Implantodontia</option>                        
                             <option value="Ortodontia">Ortodontia</option>   
                         </optgroup>                         </select><br>
-                    <br><button type="submit" name="submit"> enviar </button>
+                    <br><button type="submit" name="submit"> Enviar </button>
                 </form>
             </div>
         </div>                    

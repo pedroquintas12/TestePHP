@@ -153,7 +153,7 @@ if (isset($_POST['submit'])) {
                     <input type="text" name="usuario" placeholder="Usuario" required><br>
                     Escolha uma senha: 
                     <input type="password" class="pass__slot1" name="senha" placeholder="Senha" required><br>
-                    <br><button type="submit" name="submit"> enviar </button>
+                    <br><button type="submit" name="submit"> Enviar </button>
                 </form>
                 </form>
             </div>

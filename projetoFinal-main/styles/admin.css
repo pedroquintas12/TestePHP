@@ -134,18 +134,13 @@
     }
 }
 
-.user-card {
-    margin-bottom: 20px;
-    padding: 20px;
-    border: 1px solid var(--text-main);
-    box-sizing: border-box;
-    background-color: var(--white);
-    width: 100%;
+.card-content {
+    font-size: 1.1em; /* Aumenta o tamanho das letras */
+    color: var(--text-main);
+    text-align: center;
+    padding-bottom: 10px;
 }
 
-.card-content {
-    font-size: var(--text-main);
-    color: var(--text-main);  
-    text-align: center;
-    padding-bottom: 10px; /* Ajuste o espaçamento inferior conforme necessário */
+.buttons {
+    margin-top: 10px; /* Adiciona um pequeno espaçamento acima dos botões */
 }
