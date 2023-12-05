@@ -43,7 +43,7 @@
             // Verificar se o usuário é um administrador
             if ($nomeUsuario == 'ADMIN') {
                 $_SESSION['tipo_usuario'] = 'ADMIN';
-                header("Location: ../../front/gerenciar_usuarios/usuarios.php");
+                header("Location:telaAdm.php");
                 exit(); // Adicionado para evitar a execução de código adicional após o redirecionamento
             } elseif ($resultLoginMedico->num_rows > 0) {
                 $rowMedico = $resultLoginMedico->fetch_assoc();
@@ -55,6 +55,7 @@
             } elseif ($resultLoginPaciente->num_rows > 0) {
                 $rowPaciente = $resultLoginPaciente->fetch_assoc();
                 $_SESSION['id_paciente'] = $rowPaciente['id_paciente'];
+                $_SESSION['nome_paciente'] = $rowPaciente['nome_completo'];
                 $_SESSION['tipo_usuario'] = 'paciente';
                 header("Location: pacienteArea.php");
                 exit(); // Adicionado para evitar a execução de código adicional após o redirecionamento

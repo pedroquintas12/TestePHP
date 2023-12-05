@@ -22,7 +22,7 @@ verificarLogin();
 // Verificar se o usuário é um médico
 verificarPermissao('medico');
 
-$id_medico = $_SESSION['id_medico'];
+$id_medico = $_SESSION['id_paciente'];
 $nome_medico = $_SESSION['nome_medico']; // Supondo que você já tenha essa informação
 
 
@@ -57,7 +57,7 @@ include "conexao.php";
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
                     <a class="navbar-item" href="./index.html">Home</a>
-                    <a class="navbar-item" href="./contato.html">Contato</a>
+                    <a class="navbar-item" href="./contato.php">Contato</a>
                     <a class="navbar-item" href="./cadastroPaciente.php">Cadastro Paciente</a>
                     <a class="navbar-item" href="./cadastroMedico.php">Cadastro Medico</a>
                     <a class="navbar-item" href="./login.php">Login</a>
