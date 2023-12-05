@@ -20,7 +20,7 @@ verificarPermissao('ADMIN');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="./styles/admin.css">
+    <link rel="stylesheet" href="projetoFinal-main\styles\admin.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed&family=Inter&family=Mooli&display=swap" rel="stylesheet">
@@ -128,11 +128,12 @@ $resultado = $conn->query($sql);
           $resultadoFeedback = $conn->query($sqlFeedback);
 
           if (mysqli_num_rows($resultadoFeedback) > 0) {
+            echo "<div class='Mensagem-Feedback'>";
             echo "<p class='subtitle'>Feedback:</p>";
             while ($linhaFeedback = mysqli_fetch_assoc($resultadoFeedback)) {
                 echo "<p>" . $linhaFeedback["feedback"] . "</p>";
+            echo "</div>";
             }
-        }
       
           if ($linha2["bloqueado"] == 1) {
               echo "<p class='is-blocked'>Usuário Bloqueado</p>";
