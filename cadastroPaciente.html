@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odontoclin</title> 
+    <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="./styles/cadastroPacStyle.css">
+</head>
+<body>
+    <section>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                   <img src="./assets/dentinho.jpg">
+                </a>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="./index.html">Home</a>
+                    <a class="navbar-item" href="./contato.html">Contato</a>
+                    <a class="navbar-item" href="./cadastroPaciente.html">Cadastro Paciente</a>
+                    <a class="navbar-item" href="./cadastroMedico.html">Cadastro Medico</a>
+                    <a class="navbar-item" href="./login.html">Login</a>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <section>               
+        <div class="container">
+            <div class="formfield">
+                <h2>Cadastro Paciente</h2>
+                <form>
+                    <input type="text" name="name" placeholder="Nome" required><br>
+
+                    <input type="text" name="address" placeholder="Endereço" required><br>
+
+                    <input type="text" name="security_number" placeholder="CPF" required><br>
+
+                    <input type="email" name="email" placeholder="Email" required><br>
+
+                    Escolha uma senha: 
+                    <input type="password" class="pass__slot1" name="password" placeholder="Senha" required><br>
+                    Repita a senha:
+                    <input type="password" class="pass__slot2" name="password" placeholder="Senha" required><br>
+
+                    Data de Nascimento
+                    <input type="date" name="born_date" required><br>
+
+                    <label for="produto">Informe seu plano de saúde</label>
+
+                    <select id="produto" name="produto" class="input-global">
+                            <option value="produto1">Sulamerica</option>
+                            <option value="produto2">Porto Seguro</option>
+                            <option value="produto3">Bradesco</option>
+                            <option value="produto4">HapVida</option>                        
+                    </select><br>
+                    <br><input type="submit" value="Enviar">
+                </form>
+            </div>
+        </div>                    
+    </section>
+
+    <script src="./scripts/script.js"></script>
+
+    <footer class="rodape">
+        <ul class="rodape__list">
+            <li class="list__link">
+                <a href="##">idioma</a>
+            </li>
+            <li class="list__link">
+                <a href="##">dispositivos compatíveis</a>
+            </li>
+            <li class="list__link">
+                <a href="##">contrato de assinatura</a>
+            </li>
+            <li class="list__link">
+                <a href="##">politica de privacidade</a>
+            </li>
+            <li class="list__link">
+                <a href="##">protecao de dados no brasil</a>
+            </li>
+            <li class="list__link">
+                <a href="##">anuncios personalizados</a>
+            </li>
+            <li class="list__link">
+                <a href="##">ajuda</a>
+            </li>
+        </ul>
+
+        <p class="rodape__text">
+            Este site foi desenvolvido pela turma do 4 periodo, noite, uninassau.
+        </p>
+        <p class="rodape__text">
+            Alunos:<br> Ana Paula Ferreira Pessoa - 01538280 <br> Carlos Augusto Nogueira Duarte - 01532620 <br> Ighor Gomes Gonçalves - 24010714 <br> Maximino Coelho da Silva - 01374898 <br> Pedro Augusto Borges Quintas - 01535444.
+        </p>
+    </footer>
+
+</body>
+
+</html>

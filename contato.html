@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odontoclin</title>
+    <link rel="stylesheet" href="./styles/contato.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed&family=Inter&family=Mooli&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                   <img src="./assets/dentinho.jpg">
+                </a>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="./index.html">Home</a>
+                    <a class="navbar-item" href="./contato.html">Contato</a>
+                    <a class="navbar-item" href="./cadastroPaciente.html">Cadastro Paciente</a>
+                    <a class="navbar-item" href="./cadastroMedico.html">Cadastro Medico</a>
+                    <a class="navbar-item" href="./login.html">Login</a>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+    <div class="container">
+        <h1 class="brand"><span>Odontoclin</h1>
+        <div class="wrapper">
+          <div class="company-info">
+            <h3>Odontoclin</h3>
+            <ul>
+              <li><i class="fa fa-road"></i> R. Carmelita Muniz de Araújo, 225 </li>
+              <li><i class="fa fa-phone"></i> (81) 3413-4611</li>
+              <li><i class="fa fa-envelope"></i> odontoclin@odonto.com.br </li>
+            </ul>
+          </div>
+          <div class="contact">
+            <h3>Mande-nos um e-mail! </h3>
+
+            <form id="contactForm">
+              <p>
+                <label>Nome</label>
+                <input type="text" name="name" id="name" required>
+              </p>
+              <p>
+                <label>Sobrenome</label>
+                <input type="text" name="company" id="company">
+              </p>
+              <p>
+                <label>Email</label>
+                <input type="email" name="email" id="email" required>
+              </p>
+              <p>
+                <label>Telefone</label>
+                <input type="text" name="phone" id="phone">
+              </p>
+              <p class="full">
+                <label>Conte-nos o que houve! </label>
+                <textarea name="message" rows="5" id="message"></textarea>
+              </p>
+              <p class="full">
+                <button type="submit">Enviar</button>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+</body>
+
+<footer class="rodape">
+  <ul class="rodape__list">
+      <li class="list__link">
+          <a href="##">idioma</a>
+      </li>
+      <li class="list__link">
+          <a href="##">dispositivos compatíveis</a>
+      </li>
+      <li class="list__link">
+          <a href="##">contrato de assinatura</a>
+      </li>
+      <li class="list__link">
+          <a href="##">politica de privacidade</a>
+      </li>
+      <li class="list__link">
+          <a href="##">protecao de dados no brasil</a>
+      </li>
+      <li class="list__link">
+          <a href="##">anuncios personalizados</a>
+      </li>
+      <li class="list__link">
+          <a href="##">ajuda</a>
+      </li>
+  </ul>
+
+  <p class="rodape__text">
+      Alunos:<br> Ana Paula Ferreira Pessoa - 01538280 <br> Carlos Augusto Nogueira Duarte - 01532620 <br> Ighor Gomes Gonçalves - 24010714 <br> Maximino Coelho da Silva - 01374898 <br> Pedro Augusto Borges Quintas - 01535444.
+  </p>
+  <p class="rodape__text1">
+      Este site foi desenvolvido pela turma do 4 periodo, noite, uninassau. <br>
+      Todos os direitos reservados.
+  </p>
+</footer>
+
+<script src="./scripts/script.js"></script>
+
+</html>

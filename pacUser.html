@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página do Paciente</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
+  <link rel="stylesheet" href="./styles/areaPacStyle.css">
+</head>
+<body>
+    <!-- Não mexer aqui nem nos html nem no css pois é o header que constará em todas as telas-->
+    <div>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                <img src="./assets/dentinho.jpg">
+                </a>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="./index.html">Home</a>
+                    <a class="navbar-item" href="./contato.html">Contato</a>
+                    <a class="navbar-item" href="./cadastroPaciente.html">Cadastro Paciente</a>
+                    <a class="navbar-item" href="./cadastroMedico.html">Cadastro Medico</a>
+                    <a class="navbar-item" href="./login.html">Login</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+  <section>
+    <div class="container">
+        <div class="head"> <!--container principal-->
+            <h>Portal do Paciente</h>
+            <p>Médicos e Especialidades</p>
+            <div class="columns is-multiline"> <!-- Container dos cards medicos-->
+                <div class="column is-one-third">
+                <div class="medico-card card" name="1">
+                    <div class="card-content">
+                        <p class="title">Dr. Exemplo</p>
+                        <p class="subtitle">Clínica Geral</p>
+                        <p>Horário: Seg-Sex, 9h - 17h</p>
+                        <p>Local: Hospital Exemplo / Clínica Geral</p>
+                    </div>
+                    <div class="schedule">
+                        <form action='agendamento.php' method='post'>
+                            <input type='hidden' name='id_medico' value='1'>
+                            <input type='radio' id='hora4' name='horario' value='09:00'>
+                            <label for='hora4'>09:00</label><br>
+                            <input type='radio' id='hora5' name='horario' value='10:00'>
+                            <label for='hora5'>10:00</label><br>
+                            <input type='radio' id='hora6' name='horario' value='11:30'>
+                            <label for='hora6'>11:30</label><br>
+                        </form>
+                        <button class='button' type='submit'>Agendar</button>
+                    </div>
+                </div>
+                </div>
+                <!-- Adicione mais cards de médicos conforme necessário -->
+            </div>
+            <div class="buttons-bot">
+                <button class='button-bot' onclick='telapacientefinal()'>consultas</button>
+                <button class='button-bot'>Contato</button>
+            </div>
+        </div>
+    </div>
+    <script>
+      function telapacientefinal(){
+        window.location.href = "telapacientefinal.php";
+      }
+    </script>
+  </section>
+  <footer class="rodape">
+    <ul class="rodape__list">
+        <li class="list__link">
+            <a href="##">idioma</a>
+        </li>
+        <li class="list__link">
+            <a href="##">dispositivos compatíveis</a>
+        </li>
+        <li class="list__link">
+            <a href="##">contrato de assinatura</a>
+        </li>
+        <li class="list__link">
+            <a href="##">politica de privacidade</a>
+        </li>
+        <li class="list__link">
+            <a href="##">protecao de dados no brasil</a>
+        </li>
+        <li class="list__link">
+            <a href="##">anuncios personalizados</a>
+        </li>
+        <li class="list__link">
+            <a href="##">ajuda</a>
+        </li>
+    </ul>
+
+    <p class="rodape__text">
+        Este site foi desenvolvido pela turma do 4 periodo, noite, uninassau.
+    </p>
+    <p class="rodape__text">
+        Alunos:<br> Ana Paula Ferreira Pessoa - 01538280 <br> Carlos Augusto Nogueira Duarte - 01532620 <br> Ighor Gomes Gonçalves - 24010714 <br> Maximino Coelho da Silva - 01374898 <br> Pedro Augusto Borges Quintas - 01535444.
+    </p>
+</footer>
+</body>
+<script src="./scripts/script.js"></script>
+</html>
