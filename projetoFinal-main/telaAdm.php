@@ -134,6 +134,7 @@ $resultado = $conn->query($sql);
                 echo "<p>" . $linhaFeedback["feedback"] . "</p>";
             echo "</div>";
             }
+        }
       
           if ($linha2["bloqueado"] == 1) {
               echo "<p class='is-blocked'>Usuário Bloqueado</p>";

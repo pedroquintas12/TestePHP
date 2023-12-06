@@ -23,6 +23,9 @@
     --button-size: 0.7em;
 }
 
+body{
+   
+}
 
 .navbar-menu {
     display: none;
@@ -134,13 +137,7 @@
     }
 }
 
-.card-content {
-    font-size: 1.1em; /* Aumenta o tamanho das letras */
-    color: var(--text-main);
-    text-align: center;
-    padding-bottom: 10px;
-}
 
-.buttons {
-    margin-top: 10px; /* Adiciona um pequeno espaçamento acima dos botões */
-}
+
+
+

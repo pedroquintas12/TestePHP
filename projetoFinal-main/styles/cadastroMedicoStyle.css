@@ -56,6 +56,7 @@
     margin-bottom: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border: 1px solid black;
+    box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
 }
 
 .formfield {
@@ -154,20 +155,5 @@ input{
 .rodape__text{
     color: var(--text-second);
     font-size: 1em;
-}
-
-.formfield button[type="submit"] {
-    background-color: #6A7699; /* Azul Claro */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.2em;
-    transition: background-color 0.3s ease-in-out;
-}
-
-.formfield button[type="submit"]:hover {
-    background-color: #6667B0; 
 }
 

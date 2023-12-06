@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="./styles/admin.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed&family=Inter&family=Mooli&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <section>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item">
+                   <img src="./assets/dentinho.jpg">
+                </a>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div id="navbarMenu" class="navbar-menu">
+                <div class="navbar-end">
+                    <a class="navbar-item" href="./index.html">Home</a>
+                    <a class="navbar-item" href="./contato.html">Contato</a>
+                    <a class="navbar-item" href="./cadastroPaciente.html">Cadastro Paciente</a>
+                    <a class="navbar-item" href="./cadastroMedico.html">Cadastro Medico</a>
+                    <a class="navbar-item" href="./login.html">Login</a>
+                </div>
+            </div>
+        </nav>
+    </section>
+
+
+    <div class="header">
+        <h>Area do Administrador</h>
+        <p>Gerenciamento de usuário</p>
+    </div>
+
+    <section class="section">
+        <div class="container">
+            <h>a</h>
+            <div class="container-row">
+                <div class="row-box">                    
+                    <div class="box">
+                        <h class='box-header'>Paciente: (puxar nome do paciente)</h>
+                        <p>nome:  </p>
+                        <p>idade:  </p>
+                        <p>cpf:  </p>
+                        <p>email:  </p>
+                        <p>consulta com:  </p>
+                    </div>
+                    
+                </div>            
+         </div>
+
+         <div class="container">
+            <h></h>
+            <div class="container-row">
+                <div class="row-box">                    
+                    <div class="box">
+                        <div class='card-content'>
+                                <label>Feedback do Paciente </label><br>
+                                <textarea class="textbox" name="message" rows="5" id="message"></textarea>                                         
+                            </div>
+                    </div>
+                    
+                </div>            
+         </div>
+
+    </section>
+</body>
+<script src="./scripts/script.js"></script>
+</html>

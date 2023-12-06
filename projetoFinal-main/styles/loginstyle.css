@@ -28,7 +28,7 @@
 body {
     font-size: 16px;
     background: var(--primary-light);
-    font-family: Mulish, sans-serif;
+    /* font-family: Mulish, sans-serif; */
 }
 
 
@@ -284,17 +284,6 @@ body {
     z-index: 10;
 }
 
-@media (max-width: 840px) {
-    .form-wrapper {
-        grid-template-columns: 1fr;
-        height: 100vh;
-    }
-    
-    .info-side {
-        display: none;
-        padding: 48px 48px 48px 32px;
-    }
-}
 
 .rodape{
     text-align: center;
@@ -326,13 +315,24 @@ body {
     color: var(--text-second);
     font-size: var(--secondText-size);
     margin: 10px 0;
-    font-weight: 200;
+    
 }
 
 .rodape__text{
     color: var(--text-second);
-    font-size: 1.3em;
+    font-size: 1em;
     margin: 10px 0;
-    color: var(--text-main);
-    font-weight: 200;
+    
+}
+
+@media (max-width: 840px) {
+    .form-wrapper {
+        grid-template-columns: 1fr;
+        height: 100vh;
+    }
+    
+    .info-side {
+        display: none;
+        padding: 48px 48px 48px 32px;
+    }
 }

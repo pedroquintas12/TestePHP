@@ -34,12 +34,9 @@ body{
 
 .navbar-menu {
     display: none;
-    background-color: var(--main-bg);
-    
 }
 
 .navbar-brand{
-    background-color: var(--main-bg);
 }
 
 
