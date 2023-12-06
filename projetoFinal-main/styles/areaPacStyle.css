@@ -69,6 +69,7 @@
     border: 1px solid black;
     border-radius: 20px;
     text-align: center;
+    margin: 10px 10px 10px;
 }
 
 
@@ -113,6 +114,10 @@
     color:#fff;
     outline:0;
     transition: background-color 2s ease-out;    
+}
+
+.button-box{
+    text-align: center;
 }
 
 .button-bot{

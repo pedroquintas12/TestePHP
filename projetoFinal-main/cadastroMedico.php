@@ -17,6 +17,7 @@ if(isset($_POST['submit'])){
     $nomesobrenome = $_POST['nomesobrenome'];
     $email = $_POST['email'];
     $localtrabalho = $_POST['localtrabalho'];
+    $telefone = $_POST['numero'];
     $crm = $_POST['crm'];
     $especializacao = $_POST['especializacao'];
     $usuario = $_POST['usuario'];
@@ -31,11 +32,11 @@ if(isset($_POST['submit'])){
             die("Erro na conexão com o banco de dados: " . $conn->connect_error);
         }
 
-        $sqlVerificaUsuarioMedico = "SELECT * FROM projetophp.medicos WHERE nome_usuario = '$usuario'";
+        $sqlVerificaUsuarioMedico = "SELECT * FROM id21615508_projetophp.medicos WHERE nome_usuario = '$usuario'";
         $resultUsuarioMedico = $conn->query($sqlVerificaUsuarioMedico);
         
         // Verificar se o nome de usuário já existe em pacientes
-        $sqlVerificaUsuarioPaciente = "SELECT * FROM projetophp.pacientes WHERE nome_usuario = '$usuario'";
+        $sqlVerificaUsuarioPaciente = "SELECT * FROM id21615508_projetophp.pacientes WHERE nome_usuario = '$usuario'";
         $resultUsuarioPaciente = $conn->query($sqlVerificaUsuarioPaciente);
         
         // Verificar se o nome de usuário já existe em ambas as tabelas
@@ -51,11 +52,16 @@ if(isset($_POST['submit'])){
         addError("Por favor, preencha o campo Nome e Sobrenome.");
     }
 
+
     // Validar o email
     if (empty($email)) {
         addError("Por favor, preencha o campo Email.");
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         addError("Formato de email inválido.");
+    }
+
+    if (empty($telefone)) {
+        addError("Por favor, preencha o campo Número de telefone");
     }
 
     // Validar o local de trabalho
@@ -89,15 +95,14 @@ if(isset($_POST['submit'])){
         unset($_SESSION['errors']); // Remover a variável 'errors' da sessão
     } else {
         // Inserir os dados no banco de dados
-        $sqlInserirMedico = "INSERT INTO projetophp.medicos (nomeSobrenome, email, endereco_de_trabalho, crm, nome_usuario, senha, especialidade)
-                            VALUES ('$nomesobrenome', '$email','$localtrabalho', '$crm', '$usuario', '$senha', '$especializacao')";
+        $sqlInserirMedico = "INSERT INTO id21615508_projetophp.medicos (nomeSobrenome, email, numero_telefone, endereco_de_trabalho, crm, nome_usuario, senha, especialidade)
+                            VALUES ('$nomesobrenome', '$email','$telefone','$localtrabalho', '$crm', '$usuario', '$senha', '$especializacao')";
 
-        if ($conn->query($sqlInserirMedico) === TRUE) {
-            echo "<span style='color: green;'>Cadastro realizado com sucesso!</span>";
-            exit(); // Adicionado para evitar a execução de código adicional após o redirecionamento
-        } else {
-            echo "Erro ao cadastrar: " . $conn->error;
-        }
+
+  if ($conn->query($sqlInserirMedico) === TRUE) {
+    $_SESSION['MedicoInsert'] = "<span style='color: green;'>Cadastrado com sucesso!</span>";
+  }
+       
 
         $conn->close();
     }
@@ -142,17 +147,23 @@ if(isset($_POST['submit'])){
         <div class="container">
             <div class="formfield">
                 <h2>Cadastro Medico</h2>
+                <?php
+            if (isset($_SESSION['MedicoInsert'])) {
+            echo $_SESSION['MedicoInsert'];
+            unset($_SESSION['MedicoInsert']); // Limpar a mensagem após exibir
+              }
+            ?>
                 <!-- Adicione o formulário -->
                 <form action="cadastroMedico.php" method="post">
                     <!-- Campos do formulário -->
-                    <input type="text" name="nomesobrenome" placeholder="Nome e Sobrenome" required><br>
-                    <input type="email" name="email" placeholder="Email" required><br>
-                    <input type="text" name="localtrabalho" placeholder="Local de Trabalho" required><br>
-                    <input type="text" name="crm" placeholder="CRO" required><br>
-                    <input type="text" name="usuario" placeholder="Nome de Usuario" required><br>
-                    Escolha uma senha: 
-                    <input type="password" name="senha" placeholder="Senha" required><br>
-                    <label for="especialidade">Especialidade</label>
+                    <input type="text" name="nomesobrenome" placeholder="Nome e Sobrenome" ><br>
+                    <input type="email" name="email" placeholder="Email" ><br>
+                    <input type="text" name="numero" placeholder="Número de telefone" ><br>
+                    <input type="text" name="localtrabalho" placeholder="Local de Trabalho" ><br>
+                    <input type="text" name="crm" placeholder="CRO" ><br>
+                    <input type="text" name="usuario" placeholder="Nome de Usuario" ><br>
+                    <input type="password" name="senha" placeholder="Senha" ><br>
+                    <label for="especialidade">Especialidade</label><br>
                     <select id="especialidade" name="especializacao" class="input-global" required>
                             <option value="Bucomaxilofaciais">Bucomaxilofaciais</option>
                             <option value="Protese">Protese</option>

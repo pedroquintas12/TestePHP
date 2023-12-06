@@ -16,7 +16,7 @@ function verificarLogin() {
 // Função para verificar as permissões do usuário
 function verificarPermissao($tipo_permitido) {
     if ($_SESSION['tipo_usuario'] !== $tipo_permitido) {
-        echo "Somento Pacientes podem dar FeedBacks!";
+        echo "Somente Pacientes podem dar FeedBacks!";
         exit();
     }
 }
@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
       die("Erro na conexão com o banco de dados: " . $conn->connect_error);
   }
 
-  $sqlVerificarFeedBack = "SELECT * FROM projetophp.feedback WHERE id_paciente = '$id_paciente'";
+  $sqlVerificarFeedBack = "SELECT * FROM id21615508_projetophp.feedBack WHERE id_paciente = '$id_paciente'";
   $resultFeedBack = $conn->query($sqlVerificarFeedBack);
 
   if ($resultFeedBack->num_rows > 0) {
@@ -60,7 +60,7 @@ if (!empty($_SESSION['errors'])) {
   unset($_SESSION['errors']); // Remover a variável 'errors' da sessão
 } else {
   // Inserir os dados no banco de dados
-  $sqlInserirMedico = "INSERT INTO projetophp.feedback (id_paciente, feedBack)
+  $sqlInserirMedico = "INSERT INTO id21615508_projetophp.feedBack (id_paciente, feedBack)
                       VALUES ('$id_paciente', '$feedBack')";
 
   if ($conn->query($sqlInserirMedico) === TRUE) {
@@ -133,8 +133,8 @@ if (!empty($_SESSION['errors'])) {
             <h3>Mande-nos um feedBack! </h3>
             <form action="contato.php" method="post" id="contactForm">
               <p>
-                <label>Nome</label>
-                <?php echo "<h7>".$nome_paciente."</h7>" ?>
+                <label>Nome:</label>
+                <?php echo "<h7><strong>".$nome_paciente."</strong></h7>" ?>
               </p>
 
               <p class="full">

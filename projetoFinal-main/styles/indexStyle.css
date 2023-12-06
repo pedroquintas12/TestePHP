@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding: 0;
@@ -7,13 +8,13 @@
 :root {
     --text-main: #100101;
     --text-second: #000000ad;
-    --main-bg: #B5C9FE;
+    --main-bg: #9CC1DB;
     --item-active: #468be6;
     --primary: #6B43FF;
     --primary-light: #6667B0;
     --violet-light: #B492FD;
     --secondary: #1D1D1D;
-    --white: #F4F1FF;
+    --white: #ffffff;
     --text: #323760;
     --info-side-background: #ad4ef5;
     --main-font: 'inter';
@@ -21,6 +22,7 @@
     --secondText-size: 1em;
     --cardText-size: 0.75em;
     --button-size: 0.7em;
+    --indexBgColor: rgba(175, 174, 174, 0.448);
 }
 
 
@@ -28,20 +30,37 @@ body{
     background-color: var(--main-bg);
     color: var(--text-main);
     font-family: var(--main-font); 
-    max-width: 100%
+    max-width: 100%;
+    position: relative;
+    
+}
+
+.main-container{
+    display: grid;
+    text-align: center;
+    margin-top: 200px;
+    color: var(--text-main);
+    position: relative;
 }
 
 
 .navbar-menu {
     display: none;
+    background-color: var(--white);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+    
 }
 
 .navbar-brand{
+    background-color: var(--white);
 }
 
 
 .navbar{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     background-color: var(--main-bg);
     font-weight: bold;
     color: var(--text-main);
@@ -61,30 +80,36 @@ body{
     border: 1px solid var(--button-bg);
     height: 2px;
     width: 20px;
+    z-index: 11;
 }
 
 .main{
-    background-image: url("../assets/dentinho.jpg");
+    /* background-image: url("../assets/dentinho.jpg"); */
     background-repeat: no-repeat;
     background-size:cover;
     background-size: 90%;
     align-items: center;
     text-align: center;
+    position: relative;
 }
 
 .container{
-    height: 100vh;
+    height: 53vh;
     display: grid;
     grid-template-columns: 50% 50%;
+    position: relative;
 }
 
 .container__box{
     margin: 0 6em;
+    font-size: var(--mainText-size);
+    position: relative;
 }
 
 .container__titulo{
-    font-size: 2.5em;
+    font-size: 1.5em;
     font-weight: 500;
+    position: relative;
 }
 
 .container__img{
@@ -113,22 +138,27 @@ body{
 .container__aviso{
     font-size: 1em;
     color: var(--text-second);
+    margin-bottom: 80px;
 }
 
 .second__img{
     width: 80%;
 }
 
-.second{
+.second, container{
     align-items: center;
     margin: 0 10em;
+    padding-bottom: -15vh;
+    position: relative;
+
 }
 
 .second__container__description__title{
     font-weight: 700;
-    font-size: 3.5em;
+    font-size: 3em;
     color: var(--text-main);
-    margin-bottom: 0.1em;
+    margin-bottom: 0.3em;
+    margin-top: 0.3em;
 }
 
 .second__container__description__text{
@@ -148,27 +178,34 @@ body{
 .devices__title{
     text-align: center;
     width: 100%;
-    font-size: 3.5em;
+    font-size: 3em;
     color: var(--text-main);
+    position: relative;
+    top: 35vh;
 }
 
 .devices__list{
     display: flex;
+    position: relative;
     justify-content: center;
     text-align: center;
     list-style-type:  none;
     margin: 5em 0;
+    top: 25vh;
 }
 
 .devices__list__item{
     font-size: 2em;
     color: var(--text-main);
+    position: relative;
 }
 
 .rodape{
     text-align: center;
-    background-color: var(--main-bg);
+    background-color: var(--white);
     padding: 20px 0;
+    position: relative;
+    top: 20vh;
     
   }
   
@@ -195,6 +232,8 @@ body{
   .rodape__text{
     color: var(--text-second);
     font-size: 1em;
-  }  
-  
+  }
 
+  .mapframe{
+    position: relative;
+  }

@@ -69,6 +69,7 @@
     border: 1px solid black;
     border-radius: 20px;
     text-align: center;
+    margin: 10px 10px 10px;
 }
 
 .textbox {
@@ -94,32 +95,16 @@
 .button-bot{
     font-size: var(--secondText-size);
     background:#c9e6ff;
-    color: black;
     border:1px solid black;
     padding: 0 30px;
     margin: 20px 0;
     text-transform: uppercase;
-    text-decoration: none;
 }
-
-.button-bot a{
-    color: black;
-}
-
-.button-bot a:hover{
-    background:#92bde7;
-    color:#fff;
-    outline:0;
-    transition: background-color 2s ease-out; 
-    
-}
-
 .button-bot:hover{
     background:#92bde7;
     color:#fff;
     outline:0;
     transition: background-color 2s ease-out; 
-    cursor: pointer;
 }
 
 .rodape{
@@ -153,4 +138,6 @@
     font-size: 1em;
 }
 
-
+h1{
+    text-align: center;
+}

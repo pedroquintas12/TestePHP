@@ -1,7 +1,7 @@
 <?php
-    $servidor = "localhost:3306";
-    $usuario = "root";
-    $senha = "123456";
+    $servidor = "localhost";
+    $usuario = "id21615508_pedro";
+    $senha = "Pedro001305?";
     
 
     // Cria uma conexão com o banco de dados

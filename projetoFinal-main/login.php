@@ -34,13 +34,16 @@
             unset($_SESSION['errors']); // Remover a variável 'errors' da sessão
         } else {
             // Consulta para verificar se o nome de usuário e a senha correspondem
-            $sqlVerificaLoginMedico = "SELECT * FROM projetophp.medicos WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha'";
+            $sqlVerificaLoginMedico = "SELECT * FROM id21615508_projetophp.medicos WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha' AND bloqueado = 0";
             $resultLoginMedico = $conn->query($sqlVerificaLoginMedico);
 
-            $sqlVerificaLoginPaciente = "SELECT * FROM projetophp.pacientes WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha'";
+            $sqlVerificaLoginPaciente = "SELECT * FROM id21615508_projetophp.pacientes WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha' AND  bloqueado = 0";
             $resultLoginPaciente = $conn->query($sqlVerificaLoginPaciente);
-
-            // Verificar se o usuário é um administrador
+            
+            if('bloqueado' == 1){
+                echo "Usuario Bloqueado!";
+                exit;
+            }
             if ($nomeUsuario == 'ADMIN') {
                 $_SESSION['tipo_usuario'] = 'ADMIN';
                 header("Location:telaAdm.php");
@@ -62,7 +65,7 @@
             } else {
                 // Usuário não encontrado ou senha incorreta
                 // Adicione aqui a lógica para lidar com tentativas de login mal-sucedidas
-                echo ("Usuário ou senha incorretos. Tente novamente.");
+                echo ("Usuário ou senha incorretos ou seu usuario está bloqueado. Tente novamente.");
             }
         }
     }

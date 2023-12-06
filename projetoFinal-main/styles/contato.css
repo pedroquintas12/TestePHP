@@ -135,7 +135,7 @@ ul{
     border:0;
     text-transform: uppercase;
 }
-
+.feedback-message{ background-color:black ;}
 .contact form button:hover,.contact form button:focus{
   background:#92bde7;
   color:#fff;
@@ -183,3 +183,4 @@ ul{
   color: var(--text-second);
   font-size: 1em;
 }  
+

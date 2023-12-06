@@ -23,9 +23,6 @@
     --button-size: 0.7em;
 }
 
-body{
-   
-}
 
 .navbar-menu {
     display: none;
@@ -137,7 +134,25 @@ body{
     }
 }
 
+.card-content {
+    font-size: 1.1em; /* Aumenta o tamanho das letras */
+    color: var(--text-main);
+    text-align: center;
+    padding-bottom: 10px;
+}
 
+.buttons {
+    margin-top: 10px; /* Adiciona um pequeno espaçamento acima dos botões */
+}
 
+.user-card.card {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid var(--text-main);
+    box-sizing: border-box;
+    background-color: var(--white);
+    width: 50%;
+    text-align: center;
+    left: 25%;
 
-
+}

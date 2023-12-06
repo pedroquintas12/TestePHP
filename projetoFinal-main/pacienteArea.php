@@ -4,7 +4,7 @@ session_start();
 // Função para verificar se o usuário está logado
 function verificarLogin() {
     if (!isset($_SESSION['id_paciente'])) {
-        header("Location: ../../front/login_cadastro/login.php"); // Redirecionar para a página de login se o usuário não estiver logado
+        header("Location: login.php"); // Redirecionar para a página de login se o usuário não estiver logado
         exit();
     }
 }
@@ -73,7 +73,7 @@ $idPaciente = $_SESSION['id_paciente'];
             include "conexao.php";
 
             $sql = "SELECT m.id_medico, m.nomeSobrenome, m.especialidade, m.endereco_de_trabalho, m.nome_usuario, m.bloqueado
-            FROM projetophp.medicos AS m WHERE nome_usuario != 'ADMIN' AND bloqueado != '1'";
+            FROM id21615508_projetophp.medicos AS m WHERE nome_usuario != 'ADMIN' AND bloqueado != '1'";
 
             $resultado = mysqli_query($conn, $sql);
 
@@ -98,8 +98,9 @@ $idPaciente = $_SESSION['id_paciente'];
                     echo "<label for='hora6'>11:30</label>";
                     echo "<input type='radio' id='hora6' name='horario' value='11:30'>";
                     echo "<label for='hora6'>12:00</label>";
-                    echo "<input type='radio' id='hora6' name='horario' value='12:00'>";
+                    echo "<input type='radio' id='hora6' name='horario' value='12:00'><br>";
                     echo "<button class='button is-primary' type='submit'>Agendar</button>";
+                            
                     echo "</form>";
                     echo "</div>";
                 }

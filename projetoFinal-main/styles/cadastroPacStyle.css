@@ -54,9 +54,8 @@
     margin-bottom: 20px;
     background-color: var(--main-bg);
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid black;
     box-shadow: 0 0 20px 0 rgba(72,94,116,0.7);
+    border: 1px solid black;
 }
 
 .formfield {
@@ -82,16 +81,21 @@ input{
     width: 20.5rem;
     font-size: 1.5rem;
     color: var(--text-main);
+    border-radius: 8px;
 }
 .formfield input[type="email"]{
     text-align: center;
     width: 20.5rem;
     font-size: 1.5rem;
+    border-radius: 8px;
 }
 .formfield input[type="password"]{
-    width: 10.5rem;
+    width: 20.5rem;
     font-size: 1.5rem;
-    padding-left: 20px;
+    padding: auto;
+    border-radius: 8px;
+    text-align: center;
+    justify-content: center;
 }
 
 .formfield input[type="date"] {
@@ -156,4 +160,22 @@ input{
     color: var(--text-second);
     font-size: 1em;
 }
+
+.formfield button[type="submit"] {
+    background-color: #6A7699; /* Azul Claro */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 20px; 
+}
+
+.formfield button[type="submit"]:hover {
+    background-color: #6667B0; 
+}
+
+
 

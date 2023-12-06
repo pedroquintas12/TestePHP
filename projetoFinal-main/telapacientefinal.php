@@ -4,7 +4,7 @@ session_start();
 // Função para verificar se o usuário está logado
 function verificarLogin() {
     if (!isset($_SESSION['id_paciente'])) {
-        header("Location: ../../front/login_cadastro/login.php"); // Redirecionar para a página de login se o usuário não estiver logado
+        header("Location: login.php"); 
         exit();
     }
 }
@@ -76,8 +76,8 @@ include "conexao.php";
             // Recupera os detalhes das consultas
             $sqlDetalhes = "SELECT m.nomeSobrenome AS nome_medico, m.especialidade, m.endereco_de_trabalho AS local_atendimento,
                              c.horario, c.prontuario, c.id, c.tempo_consulta
-                            FROM projetophp.agendamentos AS c
-                            INNER JOIN projetophp.medicos AS m ON c.medico_id = m.id_medico
+                            FROM id21615508_projetophp.agendamentos AS c
+                            INNER JOIN id21615508_projetophp.medicos AS m ON c.medico_id = m.id_medico
                             WHERE c.paciente_id = $id_paciente";
 
             $resultDetalhes = $conn->query($sqlDetalhes);

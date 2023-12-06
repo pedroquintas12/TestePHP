@@ -88,7 +88,7 @@ body{
 
 .box {
     flex: 1;
-    margin: 30px 50px 24px; 
+    margin: 30px 10px 40px; 
     border: 1px solid var(--text-main);
     box-sizing: border-box;
 }
@@ -128,7 +128,7 @@ button:hover{
 
 .rodape{
     text-align: center;
-    background-color: var(--white);
+    background-color: var(--main-bg);
     padding: 20px 0;
     
   }

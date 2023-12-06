@@ -32,11 +32,11 @@ if (isset($_POST['submit'])) {
             die("Conexão falhou: " . $conn->connect_error);
         }
 
-        $sqlVerificaUsuarioMedico = "SELECT * FROM projetophp.medicos WHERE nome_usuario = '$nomeUsuario'";
+        $sqlVerificaUsuarioMedico = "SELECT * FROM id21615508_projetophp.medicos WHERE nome_usuario = '$nomeUsuario'";
         $resultUsuarioMedico = $conn->query($sqlVerificaUsuarioMedico);
         
         // Verificar se o nome de usuário já existe em pacientes
-        $sqlVerificaUsuarioPaciente = "SELECT * FROM projetophp.pacientes WHERE nome_usuario = '$nomeUsuario'";
+        $sqlVerificaUsuarioPaciente = "SELECT * FROM id21615508_projetophp.pacientes WHERE nome_usuario = '$nomeUsuario'";
         $resultUsuarioPaciente = $conn->query($sqlVerificaUsuarioPaciente);
         
         // Verificar se o nome de usuário já existe em ambas as tabelas
@@ -92,15 +92,13 @@ if (isset($_POST['submit'])) {
  
 
       // Insira os dados no banco de dados
-      $sqlInserirUsuario = "INSERT INTO projetophp.pacientes (nome_completo, email, numero_telefone, endereco, nome_usuario, senha) 
+      $sqlInserirUsuario = "INSERT INTO id21615508_projetophp.pacientes (nome_completo, email, numero_telefone, endereco, nome_usuario, senha) 
                             VALUES ('$nomeCompleto', '$email', '$numeroTelefone', '$endereco', '$nomeUsuario', '$senha')";
  
- if ($conn->query($sqlInserirUsuario) === TRUE) {
-    $successMessage = "<span style='color: red;'>Cadastro realizado com sucesso!</span>";
-} else {
-    $errorMessage = "Erro ao cadastrar: " . $conn->error;
-}
 
+ if ($conn->query($sqlInserirUsuario) === TRUE) {
+    $_SESSION['PacienteInsert'] = "<span style='color: green;'>Cadastrado com sucesso!</span>";
+  }
 
       $conn->close();
   }
@@ -114,7 +112,7 @@ if (isset($_POST['submit'])) {
     <title>Odontoclin</title> 
     <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="./styles/cadastroPacStyle.css">
+    <link rel="stylesheet" href="./styles/cadastroMedicoStyle.css">
 </head>
 <body>
     <section>
@@ -145,16 +143,20 @@ if (isset($_POST['submit'])) {
         <div class="container">
             <div class="formfield">
                 <h2>Cadastro Paciente</h2>
+                <?php
+            if (isset($_SESSION['PacienteInsert'])) {
+            echo $_SESSION['PacienteInsert'];
+            unset($_SESSION['PacienteInsert']); // Limpar a mensagem após exibir
+              }
+            ?>
                 <form action="cadastroPaciente.php" method="post">
                     <input type="text" name="nomecompleto" placeholder="Nome Completo" required><br>
                     <input type="email" name="email" placeholder="Email" required><br>
                     <input type="text" name="endereco" placeholder="Endereço" required><br>
                     <input type="text" name="numero" placeholder="Numero" required><br>
                     <input type="text" name="usuario" placeholder="Usuario" required><br>
-                    Escolha uma senha: 
                     <input type="password" class="pass__slot1" name="senha" placeholder="Senha" required><br>
                     <br><button type="submit" name="submit"> Enviar </button>
-                </form>
                 </form>
             </div>
         </div>                    

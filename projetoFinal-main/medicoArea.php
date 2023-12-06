@@ -22,7 +22,7 @@ verificarLogin();
 // Verificar se o usuário é um médico
 verificarPermissao('medico');
 
-$id_medico = $_SESSION['id_paciente'];
+$id_medico = $_SESSION['id_medico'];
 $nome_medico = $_SESSION['nome_medico']; // Supondo que você já tenha essa informação
 
 
@@ -79,10 +79,10 @@ include "conexao.php";
                     include "conexao.php";
 
                     $sql = "SELECT c.id, c.horario, c.data_consulta, p.nome_completo AS nome_paciente, m.nomeSobrenome AS nome_medico, c.prontuario, c.tempo_consulta
-                    FROM projetophp.agendamentos AS c
-                    INNER JOIN projetophp.pacientes AS p ON c.paciente_id = p.id_paciente
-                    INNER JOIN projetophp.medicos AS m ON c.medico_id = m.id_medico where medico_id = $id_medico";
-
+                    FROM id21615508_projetophp.agendamentos AS c
+                    INNER JOIN id21615508_projetophp.pacientes AS p ON c.paciente_id = p.id_paciente
+                    INNER JOIN id21615508_projetophp.medicos AS m ON c.medico_id = m.id_medico where medico_id = $id_medico";
+                    
                     $result = $conn->query($sql);
 
                     if ($result->num_rows > 0) {

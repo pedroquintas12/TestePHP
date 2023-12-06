@@ -4,7 +4,7 @@ session_start();
 // Função para verificar se o usuário está logado
 function verificarLogin() {
     if (!isset($_SESSION['id_medico'])) {
-        header("Location: ../../front/login_cadastro/login.php"); // Redirecionar para a página de login se o usuário não estiver logado
+        header("Location: login.php"); // Redirecionar para a página de login se o usuário não estiver logado
         exit();
     }
 }
@@ -40,8 +40,8 @@ if (isset($_GET['id_consulta'])) {
   $_SESSION['tempo_inicial_consulta'] = time();
 
   $sql = "SELECT a.prontuario, p.nome_completo AS nome_paciente
-          FROM projetophp.agendamentos AS a
-          INNER JOIN projetophp.pacientes AS p ON a.paciente_id = p.id_paciente
+          FROM id21615508_projetophp.agendamentos AS a
+          INNER JOIN id21615508_projetophp.pacientes AS p ON a.paciente_id = p.id_paciente
           WHERE a.id = ? AND a.medico_id = ?";
 
   $stmt = $conn->prepare($sql);
@@ -84,7 +84,7 @@ if (isset($_SESSION['tempo_inicial_prontuario'])) {
     $data_modificacao = date('Y-m-d H:i:s');
 
     // Salva a duração e a data de modificação no banco de dados
-    $updateSql = "UPDATE projetophp.agendamentos SET prontuario = ?, tempo_consulta = tempo_consulta + ?, data_consulta = ? WHERE id = ?";
+    $updateSql = "UPDATE id21615508_projetophp.agendamentos SET prontuario = ?, tempo_consulta = tempo_consulta + ?, data_consulta = ? WHERE id = ?";
     $stmt = $conn->prepare($updateSql);
     $stmt->bind_param("sisi", $prontuario_novo, $duracao_prontuario, $data_modificacao, $idConsulta);
     $stmt->execute();

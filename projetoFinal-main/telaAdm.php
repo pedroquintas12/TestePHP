@@ -1,5 +1,4 @@
 <?php
-// Inicie a sessão (certifique-se de chamar session_start() antes de qualquer saída HTML)
 session_start();
 
 // Função para verificar as permissões do usuário
@@ -20,7 +19,7 @@ verificarPermissao('ADMIN');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="projetoFinal-main\styles\admin.css">
+    <link rel="stylesheet" href="./styles/admin.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed&family=Inter&family=Mooli&display=swap" rel="stylesheet">
@@ -66,7 +65,7 @@ verificarPermissao('ADMIN');
       permissao,
       bloqueado,
       nome_usuario
-      from projetophp.pacientes 
+      from id21615508_projetophp.pacientes 
       where nome_usuario != 'ADMIN';
 ";
 
@@ -79,7 +78,7 @@ verificarPermissao('ADMIN');
       permissao,
       bloqueado,
       nome_usuario
-      from projetophp.medicos
+      from id21615508_projetophp.medicos
       where nome_usuario != 'ADMIN';";
 
 $resultado = $conn->query($sql);
@@ -94,7 +93,7 @@ $resultado = $conn->query($sql);
           echo "<p class='subtitle'>Especialidade: ". $linha["especialidade"]. "</p>";  
 
           if ($linha["bloqueado"] == 1) {
-              echo "<p class='is-blocked'>Usuário Bloqueado</p>";
+              echo "<p class='is-blocked' style='color: red'>Usuário Bloqueado</p>";
               // Botão para reativar o usuário
               echo "<form method='post' action='reativar_usuario.php'>";
               echo "<input type='hidden' name='usuario_id' value='" . $linha["id_medico"] . "'>";
@@ -124,7 +123,7 @@ $resultado = $conn->query($sql);
           echo "<p class='subtitle'>Função: ".$linha2["permissao"]."</p>";
           echo "<p class='subtitle'>Número: ".$linha2["numero_telefone"]."</p>";
           
-          $sqlFeedback = "SELECT feedback FROM projetophp.feedback WHERE id_paciente = " . $linha2["id_paciente"];
+          $sqlFeedback = "SELECT feedback FROM id21615508_projetophp.feedBack WHERE id_paciente = " . $linha2["id_paciente"];
           $resultadoFeedback = $conn->query($sqlFeedback);
 
           if (mysqli_num_rows($resultadoFeedback) > 0) {
@@ -133,11 +132,11 @@ $resultado = $conn->query($sql);
             while ($linhaFeedback = mysqli_fetch_assoc($resultadoFeedback)) {
                 echo "<p>" . $linhaFeedback["feedback"] . "</p>";
             echo "</div>";
+                }
             }
-        }
       
           if ($linha2["bloqueado"] == 1) {
-              echo "<p class='is-blocked'>Usuário Bloqueado</p>";
+              echo "<p class='is-blocked' style='color: red'>Usuário Bloqueado</p>";
               // Botão para reativar o usuário
               echo "<form method='post' action='reativar_paciente.php'>";
               echo "<input type='hidden' name='usuario_id' value='" . $linha2["id_paciente"] . "'>";
