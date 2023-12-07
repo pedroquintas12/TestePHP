@@ -28,6 +28,15 @@ $nome_medico = $_SESSION['nome_medico']; // Supondo que você já tenha essa inf
 
 include "conexao.php";
 
+if (isset($_GET['logout'])) {
+    session_start();
+    // Destruir a sessão
+    session_destroy();
+    // Redirecionar para a página home com a mensagem de desconexão
+    header("Location: ./index.html?logout=1");
+    exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +47,7 @@ include "conexao.php";
     <title>Tela do Médico</title>
     <link rel="stylesheet" href="./styles/areaMedStyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/dentinho.png" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed&family=Inter&family=Mooli&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -46,7 +55,7 @@ include "conexao.php";
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item">
-                <img src="./assets/dentinho.jpg">
+                <img src="./assets/dentinho.png">
                 </a>
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
                     <span aria-hidden="true"></span>
@@ -56,11 +65,13 @@ include "conexao.php";
             </div>
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item" href="./index.html">Home</a>
+                    <a class="navbar-item" href="./index.php">Home</a>
                     <a class="navbar-item" href="./contato.php">Contato</a>
                     <a class="navbar-item" href="./cadastroPaciente.php">Cadastro Paciente</a>
                     <a class="navbar-item" href="./cadastroMedico.php">Cadastro Medico</a>
                     <a class="navbar-item" href="./login.php">Login</a>
+                    <a style='color:red' class="navbar-item" href="./index.php?logout=1">Sair</a>
+
                 </div>
             </div>
         </nav>
@@ -79,9 +90,9 @@ include "conexao.php";
                     include "conexao.php";
 
                     $sql = "SELECT c.id, c.horario, c.data_consulta, p.nome_completo AS nome_paciente, m.nomeSobrenome AS nome_medico, c.prontuario, c.tempo_consulta
-                    FROM id21615508_projetophp.agendamentos AS c
-                    INNER JOIN id21615508_projetophp.pacientes AS p ON c.paciente_id = p.id_paciente
-                    INNER JOIN id21615508_projetophp.medicos AS m ON c.medico_id = m.id_medico where medico_id = $id_medico";
+                    FROM agendamentos AS c
+                    INNER JOIN pacientes AS p ON c.paciente_id = p.id_paciente
+                    INNER JOIN medicos AS m ON c.medico_id = m.id_medico where medico_id = $id_medico";
                     
                     $result = $conn->query($sql);
 
@@ -147,7 +158,7 @@ include "conexao.php";
         </ul>
 
         <p class="rodape__text">
-            Alunos:<br> Ana Paula Ferreira Pessoa - 01538280 <br> Carlos Augusto Nogueira Duarte - 01532620 <br> Ighor Gomes Gonçalves - 24010714 <br> Maximino Coelho da Silva - 01374898 <br> Pedro Augusto Borges Quintas - 01535444.
+            Alunos:<br> Ana Paula Ferreira Pessoa - 01538280 <br> Carlos Augusto Nogueira Duarte - 01532606 <br> Ighor Gomes Gonçalves - 24010714 <br> Maximino Coelho da Silva - 01374898 <br> Pedro Augusto Borges Quintas - 01535444.
         </p>
         <p class="rodape__text1">
             Este site foi desenvolvido pela turma do 4 periodo, noite, uninassau. <br>

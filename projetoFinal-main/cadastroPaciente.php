@@ -32,11 +32,11 @@ if (isset($_POST['submit'])) {
             die("Conexão falhou: " . $conn->connect_error);
         }
 
-        $sqlVerificaUsuarioMedico = "SELECT * FROM id21615508_projetophp.medicos WHERE nome_usuario = '$nomeUsuario'";
+        $sqlVerificaUsuarioMedico = "SELECT * FROM medicos WHERE nome_usuario = '$nomeUsuario'";
         $resultUsuarioMedico = $conn->query($sqlVerificaUsuarioMedico);
         
         // Verificar se o nome de usuário já existe em pacientes
-        $sqlVerificaUsuarioPaciente = "SELECT * FROM id21615508_projetophp.pacientes WHERE nome_usuario = '$nomeUsuario'";
+        $sqlVerificaUsuarioPaciente = "SELECT * FROM pacientes WHERE nome_usuario = '$nomeUsuario'";
         $resultUsuarioPaciente = $conn->query($sqlVerificaUsuarioPaciente);
         
         // Verificar se o nome de usuário já existe em ambas as tabelas
@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
  
 
       // Insira os dados no banco de dados
-      $sqlInserirUsuario = "INSERT INTO id21615508_projetophp.pacientes (nome_completo, email, numero_telefone, endereco, nome_usuario, senha) 
+      $sqlInserirUsuario = "INSERT INTO pacientes (nome_completo, email, numero_telefone, endereco, nome_usuario, senha) 
                             VALUES ('$nomeCompleto', '$email', '$numeroTelefone', '$endereco', '$nomeUsuario', '$senha')";
  
 
@@ -110,7 +110,7 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odontoclin</title> 
-    <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/dentinho.png" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="./styles/cadastroMedicoStyle.css">
 </head>
@@ -119,7 +119,7 @@ if (isset($_POST['submit'])) {
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item">
-                   <img src="./assets/dentinho.jpg">
+                   <img src="./assets/dentinho.png">
                 </a>
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
                     <span aria-hidden="true"></span>
@@ -129,7 +129,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item" href="./index.html">Home</a>
+                    <a class="navbar-item" href="./index.php">Home</a>
                     <a class="navbar-item" href="./contato.php">Contato</a>
                     <a class="navbar-item" href="./cadastroPaciente.php">Cadastro Paciente</a>
                     <a class="navbar-item" href="./cadastroMedico.php">Cadastro Medico</a>
@@ -157,8 +157,11 @@ if (isset($_POST['submit'])) {
                     <input type="text" name="usuario" placeholder="Usuario" required><br>
                     <input type="password" class="pass__slot1" name="senha" placeholder="Senha" required><br>
                     <br><button type="submit" name="submit"> Enviar </button>
+                   
                 </form>
+                 <button onclick="window.location.href = 'cadastroMedico.php'"class="formfield__button2" >Sou Médico</button>
             </div>
+
         </div>                    
     </section>
 
@@ -193,7 +196,7 @@ if (isset($_POST['submit'])) {
             Este site foi desenvolvido pela turma do 4 periodo, noite, uninassau.
         </p>
         <p class="rodape__text">
-            Alunos:<br> Ana Paula Ferreira Pessoa - 01538280 <br> Carlos Augusto Nogueira Duarte - 01532620 <br> Ighor Gomes Gonçalves - 24010714 <br> Maximino Coelho da Silva - 01374898 <br> Pedro Augusto Borges Quintas - 01535444.
+            Alunos:<br> Ana Paula Ferreira Pessoa - 01538280 <br> Carlos Augusto Nogueira Duarte - 01532606 <br> Ighor Gomes Gonçalves - 24010714 <br> Maximino Coelho da Silva - 01374898 <br> Pedro Augusto Borges Quintas - 01535444.
         </p>
     </footer>
 

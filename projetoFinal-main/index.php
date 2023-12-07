@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/dentinho.png" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed&family=Inter&family=Mooli&display=swap" rel="stylesheet">
     
 </head>
@@ -18,7 +18,7 @@
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item">
-                   <img src="./assets/dentinho.jpg">
+                   <img src="./assets/dentinho.png">
                 </a>
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
                     <span aria-hidden="true"></span>
@@ -28,7 +28,7 @@
             </div>
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item" href="./index.html">Home</a>
+                    <a class="navbar-item" href="./index.php">Home</a>
                     <a class="navbar-item" href="./contato.php">Contato</a>
                     <a class="navbar-item" href="./cadastroPaciente.php">Cadastro Paciente</a>
                     <a class="navbar-item" href="./cadastroMedico.php">Cadastro Medico</a>
@@ -37,7 +37,12 @@
             </div>
         </nav>
     </section>
-
+<?php
+// Verificar se há uma mensagem de desconexão na URL
+if (isset($_GET['logout']) && $_GET['logout'] == 1) {
+    echo '<div class="notification is-success">Você foi desconectado com sucesso.</div>';
+}
+?>
 <section>
     <div class="main-container">
         <div class="container__box">
@@ -92,7 +97,7 @@
     </section>
 
     <section class="second container">
-        <img class="second__img " src="./assets/dentinho.jpg">
+        <img class="second__img " src="./assets/dentinho.png">
         <div class="second__container__description">
 
             <h2 class="second__container__description__title">Venha conhecer nosso consultorio! Agende uma visita!</h2>
@@ -149,7 +154,7 @@
             <br>Este site foi desenvolvido pela turma do 4º período, Noite,  UNINASSAU.
         </p>
         <p class="rodape__text">
-            <br>Alunos:<br> Ana Paula Ferreira Pessoa - 01538280 <br> Carlos Augusto Nogueira Duarte - 01532620 <br> Ighor Gomes Gonçalves - 24010714 <br> Maximino Coelho da Silva - 01374898 <br> Pedro Augusto Borges Quintas - 01535444.
+            <br>Alunos:<br> Ana Paula Ferreira Pessoa - 01538280 <br> Carlos Augusto Nogueira Duarte - 01532606 <br> Ighor Gomes Gonçalves - 24010714 <br> Maximino Coelho da Silva - 01374898 <br> Pedro Augusto Borges Quintas - 01535444.
         </p>
     </footer>
 

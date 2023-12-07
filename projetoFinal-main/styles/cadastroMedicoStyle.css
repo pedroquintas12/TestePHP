@@ -177,3 +177,20 @@ input{
 .input-global{
     font-size: var(--secondText-size);
 }
+
+.formfield__button2{
+        background-color: #6A7699; /* Azul Claro */
+    color: white;
+    border: none;
+    padding: 10px 20px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease-in-out;
+    margin-top: 1vh;
+    
+}
+.formfield__button2:hover{
+        background-color: #6667B0; 
+
+}

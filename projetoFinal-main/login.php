@@ -34,10 +34,10 @@
             unset($_SESSION['errors']); // Remover a variável 'errors' da sessão
         } else {
             // Consulta para verificar se o nome de usuário e a senha correspondem
-            $sqlVerificaLoginMedico = "SELECT * FROM id21615508_projetophp.medicos WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha' AND bloqueado = 0";
+            $sqlVerificaLoginMedico = "SELECT * FROM medicos WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha' AND bloqueado = 0";
             $resultLoginMedico = $conn->query($sqlVerificaLoginMedico);
 
-            $sqlVerificaLoginPaciente = "SELECT * FROM id21615508_projetophp.pacientes WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha' AND  bloqueado = 0";
+            $sqlVerificaLoginPaciente = "SELECT * FROM pacientes WHERE nome_usuario = '$nomeUsuario' AND senha = '$senha' AND  bloqueado = 0";
             $resultLoginPaciente = $conn->query($sqlVerificaLoginPaciente);
             
             if('bloqueado' == 1){
@@ -79,7 +79,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
+        <link rel="shortcut icon" href="./assets/dentinho.png" type="image/x-icon" />
         <link href="https://fonts.googleapis.com/css2?family=Mulish&display=swap"
             rel="stylesheet"
             type='text/css'
@@ -143,8 +143,9 @@
                         Entrar
                     </button>
                     <div class="my-form__actions">
-                        <a href="#" title="Create Account">
-                            Esqueci minha senha
+                    <a href="cadastroPaciente.php" title="Create Account">
+                            Cadastre-se
+                        </a>                           
                         </a>
                         <a href="./index.html" title="Create Account">
                             Voltar ao inicio
@@ -180,7 +181,7 @@
         </ul>
 
         <p class="rodape__text">
-            Alunos:<br> Ana Paula Ferreira Pessoa - 01538280 <br> Carlos Augusto Nogueira Duarte - 01532620 <br> Ighor Gomes Gonçalves - 24010714 <br> Maximino Coelho da Silva - 01374898 <br> Pedro Augusto Borges Quintas - 01535444.
+            Alunos:<br> Ana Paula Ferreira Pessoa - 01538280 <br> Carlos Augusto Nogueira Duarte - 01532606 <br> Ighor Gomes Gonçalves - 24010714 <br> Maximino Coelho da Silva - 01374898 <br> Pedro Augusto Borges Quintas - 01535444.
         </p>
         <p class="rodape__text1">
             Este site foi desenvolvido pela turma do 4 periodo, noite, uninassau. <br>

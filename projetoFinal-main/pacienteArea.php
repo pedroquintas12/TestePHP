@@ -23,6 +23,15 @@ verificarLogin();
 // Verificar se o usuário é um paciente
 verificarPermissao('paciente');
 $idPaciente = $_SESSION['id_paciente'];
+
+if (isset($_GET['logout'])) {
+    session_start();
+    // Destruir a sessão
+    session_destroy();
+    // Redirecionar para a página home com a mensagem de desconexão
+    header("Location: ./index.html?logout=1");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,7 +41,7 @@ $idPaciente = $_SESSION['id_paciente'];
     <title>Odontoclin</title>
     <link rel="stylesheet" href="./styles/areaPacStyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/dentinho.png" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed&family=Inter&family=Mooli&display=swap" rel="stylesheet">
 </head>
 
@@ -41,7 +50,7 @@ $idPaciente = $_SESSION['id_paciente'];
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item">
-                <img src="./assets/dentinho.jpg">
+                <img src="./assets/dentinho.png">
                 </a>
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
                     <span aria-hidden="true"></span>
@@ -51,11 +60,13 @@ $idPaciente = $_SESSION['id_paciente'];
             </div>
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item" href="./index.html">Home</a>
+                    <a class="navbar-item" href="./index.php">Home</a>
                     <a class="navbar-item" href="./contato.php">Contato</a>
                     <a class="navbar-item" href="./cadastroPaciente.php">Cadastro Paciente</a>
                     <a class="navbar-item" href="./cadastroMedico.php">Cadastro Medico</a>
                     <a class="navbar-item" href="./login.php">Login</a>
+                    <a style='color:red' class="navbar-item" href="./index.php?logout=1">Sair</a>
+
                 </div>
             </div>
         </nav>
@@ -73,7 +84,7 @@ $idPaciente = $_SESSION['id_paciente'];
             include "conexao.php";
 
             $sql = "SELECT m.id_medico, m.nomeSobrenome, m.especialidade, m.endereco_de_trabalho, m.nome_usuario, m.bloqueado
-            FROM id21615508_projetophp.medicos AS m WHERE nome_usuario != 'ADMIN' AND bloqueado != '1'";
+            FROM medicos AS m WHERE nome_usuario != 'ADMIN' AND bloqueado != '1'";
 
             $resultado = mysqli_query($conn, $sql);
 

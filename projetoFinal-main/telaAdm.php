@@ -11,6 +11,14 @@ function verificarPermissao($tipo_permitido) {
 
 // Verificar se o usuário é um paciente
 verificarPermissao('ADMIN');
+if (isset($_GET['logout'])) {
+    session_start();
+    // Destruir a sessão
+    session_destroy();
+    // Redirecionar para a página home com a mensagem de desconexão
+    header("Location: ./index.html?logout=1");
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +29,7 @@ verificarPermissao('ADMIN');
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./styles/admin.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/dentinho.png" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed&family=Inter&family=Mooli&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -30,7 +38,7 @@ verificarPermissao('ADMIN');
         <nav class="navbar" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item">
-                   <img src="./assets/dentinho.jpg">
+                   <img src="./assets/dentinho.png">
                 </a>
                 <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
                     <span aria-hidden="true"></span>
@@ -40,11 +48,13 @@ verificarPermissao('ADMIN');
             </div>
             <div id="navbarMenu" class="navbar-menu">
                 <div class="navbar-end">
-                    <a class="navbar-item" href="./index.html">Home</a>
+                    <a class="navbar-item" href="./index.php">Home</a>
                     <a class="navbar-item" href="./contato.php">Contato</a>
                     <a class="navbar-item" href="./cadastroPaciente.php">Cadastro Paciente</a>
                     <a class="navbar-item" href="./cadastroMedico.php">Cadastro Medico</a>
                     <a class="navbar-item" href="./login.php">Login</a>
+                    <a style='color:red' class="navbar-item" href="./index.php?logout=1">Sair</a>
+
                 </div>
             </div>
         </nav>
@@ -65,7 +75,7 @@ verificarPermissao('ADMIN');
       permissao,
       bloqueado,
       nome_usuario
-      from id21615508_projetophp.pacientes 
+      from pacientes 
       where nome_usuario != 'ADMIN';
 ";
 
@@ -78,7 +88,7 @@ verificarPermissao('ADMIN');
       permissao,
       bloqueado,
       nome_usuario
-      from id21615508_projetophp.medicos
+      from medicos
       where nome_usuario != 'ADMIN';";
 
 $resultado = $conn->query($sql);
@@ -101,7 +111,6 @@ $resultado = $conn->query($sql);
               echo "</form>";
           } else {
               echo "<div class='buttons'>";
-              echo "<button class='button is-success'>Ativar</button>";
               echo "<form method='post' action='bloquear_usuario.php'>";
               echo "<input type='hidden' name='usuario_id' value='" . $linha["id_medico"] . "'>";
               echo "<button type='submit' class='button is-warning'>Bloquear</button>";
@@ -123,7 +132,7 @@ $resultado = $conn->query($sql);
           echo "<p class='subtitle'>Função: ".$linha2["permissao"]."</p>";
           echo "<p class='subtitle'>Número: ".$linha2["numero_telefone"]."</p>";
           
-          $sqlFeedback = "SELECT feedback FROM id21615508_projetophp.feedBack WHERE id_paciente = " . $linha2["id_paciente"];
+          $sqlFeedback = "SELECT feedback FROM feedBack WHERE id_paciente = " . $linha2["id_paciente"];
           $resultadoFeedback = $conn->query($sqlFeedback);
 
           if (mysqli_num_rows($resultadoFeedback) > 0) {
@@ -144,7 +153,6 @@ $resultado = $conn->query($sql);
               echo "</form>";
           } else {
               echo "<div class='buttons'>";
-              echo "<button class='button is-success'>Ativar</button>";
               echo "<form method='post' action='bloquear_paciente.php'>";
               echo "<input type='hidden' name='usuario_id' value='" . $linha2["id_paciente"] . "'>";
               echo "<button type='submit' class='button is-warning'>Bloquear</button>";

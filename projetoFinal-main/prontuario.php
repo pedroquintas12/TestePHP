@@ -40,8 +40,8 @@ if (isset($_GET['id_consulta'])) {
   $_SESSION['tempo_inicial_consulta'] = time();
 
   $sql = "SELECT a.prontuario, p.nome_completo AS nome_paciente
-          FROM id21615508_projetophp.agendamentos AS a
-          INNER JOIN id21615508_projetophp.pacientes AS p ON a.paciente_id = p.id_paciente
+          FROM agendamentos AS a
+          INNER JOIN pacientes AS p ON a.paciente_id = p.id_paciente
           WHERE a.id = ? AND a.medico_id = ?";
 
   $stmt = $conn->prepare($sql);
@@ -84,7 +84,7 @@ if (isset($_SESSION['tempo_inicial_prontuario'])) {
     $data_modificacao = date('Y-m-d H:i:s');
 
     // Salva a duração e a data de modificação no banco de dados
-    $updateSql = "UPDATE id21615508_projetophp.agendamentos SET prontuario = ?, tempo_consulta = tempo_consulta + ?, data_consulta = ? WHERE id = ?";
+    $updateSql = "UPDATE agendamentos SET prontuario = ?, tempo_consulta = tempo_consulta + ?, data_consulta = ? WHERE id = ?";
     $stmt = $conn->prepare($updateSql);
     $stmt->bind_param("sisi", $prontuario_novo, $duracao_prontuario, $data_modificacao, $idConsulta);
     $stmt->execute();
@@ -108,7 +108,7 @@ $conn->close();
     <title>Visualização de Prontuários</title>
     <link rel="stylesheet" href="./styles/histConsultStyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="shortcut icon" href="./assets/dentinho.jpg" type="image/x-icon" />
+    <link rel="shortcut icon" href="./assets/dentinho.png" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Cabin+Condensed&family=Inter&family=Mooli&display=swap" rel="stylesheet">
 </head>
 <body>
